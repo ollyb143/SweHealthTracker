@@ -1,6 +1,7 @@
 import React from "react";
 import '../../landing.css'
 import NavBar from "../../components/NavBar";
+import Footer from "../../components/Footer";
 
 const LandingPage = () => {
   return ( 
@@ -19,6 +20,8 @@ const LandingPage = () => {
           <button id="loginButton" onClick={() => window.location.href = '/login'}>Sign in</button>
         </section>
       </main>
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

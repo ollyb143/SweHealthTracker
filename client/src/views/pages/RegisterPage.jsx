@@ -1,11 +1,14 @@
 import React from "react";
 import NavBar from "../../components/NavBar";
+import Footer from "../../components/Footer";
+
 
 const RegisterPage = () => {
     return ( 
         <div>
           {/* Navbar */}
           <NavBar />
+<<<<<<< HEAD
           <main>
             <section id="enterInfo">
               <h1 id="registerText">Register</h1>
@@ -49,6 +52,13 @@ const RegisterPage = () => {
               <button id="continueButton">Continue</button>
             </section>
           </main>
+=======
+          <h1>Welcome to the Sign Up Page</h1>
+
+
+          {/* Footer */}
+          <Footer />
+>>>>>>> e9f2ad99bdb66fbad6c24d57a64bb94e7a7f22d3
         </div>
       );
   };
