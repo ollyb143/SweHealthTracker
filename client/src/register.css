@@ -1,0 +1,74 @@
+#registerMain {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10%;
+    margin: 25px 5%;
+    padding: 10px;
+    border: solid;
+    
+    background: rgb(129,240,195);
+    background: linear-gradient(90deg, rgba(129,240,195,1) 15%, rgba(98,163,208,1) 55%);
+}
+
+#registerMain > * {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#enterInfo > input {
+    display: block;
+    text-align: center;
+    width: 100%;
+    height: 15px;
+    border-radius: 25px;
+    font-size: 15px;
+}
+
+#enterInfo > label {
+    align-self: normal;
+    margin-top: 10px;
+}
+
+#enterInfo {
+    display: inline-flex;
+}
+
+#additionalInfo > input{
+    display: block;
+    text-align: center;
+    width: 100%;
+    height: 15px;
+    border-radius: 25px;
+    font-size: 15px;
+}
+
+#additionalInfo > label {
+    align-self: normal;
+    margin-top: 10px;
+}
+
+#additionalInfo > select {
+    display: block;
+    text-align: center;
+    width: 100%;
+    height: 15%;
+    border-radius: 25px;
+    font-size: 15px;
+}
+
+#additionalInfo > button {
+    display: block;
+    justify-self: center;
+    text-align: center;
+    margin: 10px;
+    width: 50%;
+    height: 15%;
+    border-radius: 25px;
+    font-size: 15px;
+    background: black;
+    margin-top: 25px;
+    color: white;
+}
