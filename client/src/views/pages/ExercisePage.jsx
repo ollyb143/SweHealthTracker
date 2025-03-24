@@ -1,7 +1,7 @@
 import React from "react";
 import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
-import "./ExercisePage.css";
+import "../../excercisePage.css";
 
 
 const ExercisePage = () => {
@@ -9,8 +9,6 @@ const ExercisePage = () => {
         <div>
           {/* Navbar */}
           <NavBar />
-          <h1>Welcome to the Exercise Page</h1>
-
           <div class="container">
             <div class="header">
               <h1>Log Exercise</h1>

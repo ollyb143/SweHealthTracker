@@ -6,33 +6,6 @@ body {
     padding: 0;
 }
 
-/* Navbar */
-.navbar {
-    background: black;
-    color: white;
-    display: flex;
-    justify-content: space-between  ;
-    padding: 15px 20px;
-    align-items: center;
-}
-
-.navbar ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
-
-.navbar ul li{
-    margin-left: 15px;
-}
-
-.narbar ul li a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-}
-
 /* Header */
 .header {
     background: linear-gradient(to right, #ccfed8, #95b9ff );
@@ -57,13 +30,13 @@ body {
     margin-bottom: 20px;
 }
 
-label {
+.data-time > label {
     font-weight: bold;
     display: block;
     margin-bottom: 5px;
 }
 
-input {
+.data-time > input {
     width: 100%;
     padding: 10px;
     border-radius: 5px;
