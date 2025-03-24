@@ -1,0 +1,103 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    background: #f8f8f8;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+.navbar {
+    background: black;
+    color: white;
+    display: flex;
+    justify-content: space-between  ;
+    padding: 15px 20px;
+    align-items: center;
+}
+
+.navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navbar ul li{
+    margin-left: 15px;
+}
+
+.narbar ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+/* Header */
+.header {
+    background: linear-gradient(to right, #ccfed8, #95b9ff );
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+/*Form */
+
+.container {
+    width: 60%;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.date-time, .exercise-type, .length-input {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+}
+
+/* Excercise buttons */
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.type-btn {
+    padding: 10px 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background: white;
+    cursor: pointer;
+}
+
+/* Log Button */
+
+#log-btn {
+    width: 100%;
+    background: black;
+    color: white;
+    padding: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+#log-btn:hover {
+    background: #333;
+}
