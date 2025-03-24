@@ -40,8 +40,8 @@ const ExercisePage = () => {
             </div>
 
             <button id="log-btn">Log Excercise</button>
-        </div>
-    </div>
+            </div>
+          </div>
 
 
           {/* Footer */}
