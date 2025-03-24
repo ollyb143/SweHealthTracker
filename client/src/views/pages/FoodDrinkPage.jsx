@@ -9,7 +9,7 @@ const FoodDrinkPage = () => {
       <div>
       <NavBar />
 
-      <h1 className="foodpage-title">Your Food Diary</h1>
+      <h1 className="foodpage-title">Food Diary</h1>
 
 
       <section className="daily-calories">
