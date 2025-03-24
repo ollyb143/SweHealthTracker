@@ -1,4 +1,3 @@
-/* === General Styling === */
 body {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
@@ -11,7 +10,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 2% 0;
+    margin: 3%;
 }
 
 h2 {
@@ -24,6 +23,7 @@ h2 {
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 3%;
+    text-align: center;
 }
 
 .calorie-progress{
@@ -31,10 +31,10 @@ h2 {
     width: 100%;
     box-sizing: border-box;
     height: 100px;
-
 }
 
-/* === Food Log Container === */
+
+
 .food-log {
     display: flex;
     justify-content: space-between;
@@ -70,19 +70,18 @@ h2 {
     margin-bottom: 8px;
 }
 
-/* === Delete Button === */
 .delete-btn {
-    background-color: #3f77e9;
+    background-color: #61a5ce;
     color: white;
     border: none;
-    padding: 6px 12px;
+    padding: 6px 10px;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
 
 .delete-btn:hover {
-    background-color: #75baff;
+    background-color: #7be2c4;
 }
 
 
@@ -149,7 +148,7 @@ h2 {
     }
 
     .meal-section {
-        width: 100%; /* Stack vertically on smaller screens */
+        width: 100%; 
     }
 }
 
