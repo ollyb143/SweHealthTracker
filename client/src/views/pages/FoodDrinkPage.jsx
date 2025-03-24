@@ -10,6 +10,20 @@ const FoodDrinkPage = () => {
       <NavBar />
 
       <h1 className="foodpage-title">Your Food Diary</h1>
+
+
+      <section className="daily-calories">
+        <h2>Your Calorie Count for Today</h2>
+        <progress className="calorie-progress" value="20" max="100">20%</progress>
+        <div className="calorie-message">
+          <h3>You have consumed 200 calories,</h3>
+          <h3>and burned 300 calories. Good job!</h3>
+        </div>
+
+
+      </section>
+
+
     
         <div className="food-log">
     
@@ -82,8 +96,11 @@ const FoodDrinkPage = () => {
         </div>
 
         <section className="custom-food-section">
-            <h2>Add a new item</h2>
+            <h2>Add a custom item</h2>
+            <label for="custom-food-input">Name:</label>
             <input type="text" className="custom-food-input"/>
+            <label for="custom-calorie-input">Calories:</label>
+            <input type="number" className="custom-calorie-input"/>
             <button className="custom-food-btn">Add</button>
           </section>
 

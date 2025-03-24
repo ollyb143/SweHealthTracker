@@ -18,6 +18,22 @@ h2 {
     margin: 0 0 12px 0;
 }
 
+.daily-calories{
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 3%;
+}
+
+.calorie-progress{
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    height: 100px;
+
+}
+
 /* === Food Log Container === */
 .food-log {
     display: flex;
@@ -28,18 +44,18 @@ h2 {
     margin: 3%;
 }
 
-/* === Meal Sections === */
+
 .meal-section {
     background-color: #ffffff;
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    flex: 1; /* Make the sections evenly sized */
-    min-width: 280px; /* Prevent them from shrinking too much */
+    flex: 1; 
+    min-width: 280px; 
     box-sizing: border-box;
 }
 
-/* === Consumable List === */
+
 .consumable-list {
     margin-bottom: 12px;
 }
@@ -69,7 +85,7 @@ h2 {
     background-color: #75baff;
 }
 
-/* === Calorie Count === */
+
 .meal-calorie-count {
     display: flex;
     justify-content: space-between;
@@ -79,7 +95,7 @@ h2 {
     margin-top: 12px;
 }
 
-/* === Dropdown and Button Styling === */
+
 .food-dropdown {
     width: 100%;
     padding: 8px;
@@ -103,11 +119,11 @@ h2 {
 
 .add-food-btn:hover,
 .custom-food-btn:hover {
-    background-color: #45a049;
+    background-color: linear-gradient(to right, #61a4d0,  #81f1c1);
 }
 
-/* === Custom Food Section Styling === */
-.custom-food-section {
+
+.custom-food-section{
     background-color: #ffffff;
     padding: 20px;
     border-radius: 12px;
@@ -116,7 +132,7 @@ h2 {
     margin-bottom: 10%;
 }
 
-.custom-food-input {
+.custom-food-input, .custom-calorie-input {
     width: 100%; 
     padding: 8px;
     margin-bottom: 12px;
@@ -126,7 +142,7 @@ h2 {
 }
 
 
-/* === Responsive Styling === */
+
 @media (max-width: 768px) {
     .food-log {
         flex-direction: column;
