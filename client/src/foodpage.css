@@ -1,0 +1,139 @@
+/* === General Styling === */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.foodpage-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2% 0;
+}
+
+h2 {
+    margin: 0 0 12px 0;
+}
+
+/* === Food Log Container === */
+.food-log {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 3%;
+}
+
+/* === Meal Sections === */
+.meal-section {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex: 1; /* Make the sections evenly sized */
+    min-width: 280px; /* Prevent them from shrinking too much */
+    box-sizing: border-box;
+}
+
+/* === Consumable List === */
+.consumable-list {
+    margin-bottom: 12px;
+}
+
+.consumable-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    background-color: #f4f4f4;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+/* === Delete Button === */
+.delete-btn {
+    background-color: #3f77e9;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.delete-btn:hover {
+    background-color: #75baff;
+}
+
+/* === Calorie Count === */
+.meal-calorie-count {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    background-color: #f4f4f4;
+    border-radius: 6px;
+    margin-top: 12px;
+}
+
+/* === Dropdown and Button Styling === */
+.food-dropdown {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+
+.add-food-btn,
+.custom-food-btn {
+    background-image: linear-gradient(to right, #81f1c1, #61a4d0);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.2s ease;
+}
+
+.add-food-btn:hover,
+.custom-food-btn:hover {
+    background-color: #45a049;
+}
+
+/* === Custom Food Section Styling === */
+.custom-food-section {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 3%;
+    margin-bottom: 10%;
+}
+
+.custom-food-input {
+    width: 100%; 
+    padding: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box; 
+}
+
+
+/* === Responsive Styling === */
+@media (max-width: 768px) {
+    .food-log {
+        flex-direction: column;
+    }
+
+    .meal-section {
+        width: 100%; /* Stack vertically on smaller screens */
+    }
+}
+
