@@ -20,7 +20,8 @@ A health tracker website application aiming to help inform users of basic health
 - [Node JS](https://nodejs.org/en) -- JavaScript runtime environment for server-side and networking applications
 - [React / Vite](https://vite.dev) -- Fast front-end development framework with modern tooling for React
 - [React Router DOM](https://reactrouter.com/en/main) -- Routing library for navigation in React web applications
-
+- [Knex.js](https://knexjs.org) -- Routing library for navigation in React web applications
+- [PostgreSQL](https://www.postgresql.org/download/) -- Open-source relational database system
 
 ## Steps to Run the Application
 1. **Navigate to the client folder**
@@ -39,3 +40,89 @@ A health tracker website application aiming to help inform users of basic health
    This will open up the application in your chosen search engine
 
 
+## To install dependencies - for app folder
+1. **Navigate to the app folder**
+2. **Install the packages** by running:
+   ```sh
+   npm init
+   ```
+   ```sh
+   npm i --save-dev nodemon
+   ```
+   ```sh
+   npm i express --save
+   ```
+   ```sh
+   npm i dotenv --save
+   ```
+   ```sh
+   npm i cors --save 
+   ```
+   ```sh
+   npm i pg --save
+   ```
+   ```sh
+   npm i knex --save
+   ```
+3. **Make sure to change knexfile.js to your specific db info** then in db folder terminal migrate files one by one by doing: 
+   ```sh
+   npx init
+   ```
+   ```sh
+   npx knex migrate:up 20250401122756_create_users_table.js
+   ```
+   ```sh
+   npx knex migrate:up 20250401144211_create_account_table.js
+   ```
+   ```sh
+   npx knex migrate:up 20250401145211_create_groups_table.js
+   ```
+   ```sh
+   npx knex migrate:up 20250401150202_create_memberships_table.js
+   ```
+   ```sh
+   npx knex migrate:up 20250401151900_create_goals_table.js
+   ```
+   ```sh
+   npx knex migrate:up 20250401151924_create_consumables_table.js
+   ```
+   ```sh
+   npx knex migrate:up 20250401151946_create_diets_table.js
+   ```
+   ```sh
+   npx knex migrate:up 20250401152008_create_exercise_table.js
+   ```
+   ```sh
+   npx knex migrate:up 20250401152032_create_userhistory_table.js
+   ```
+ 
+4. **Then the seed files**, in db folder run the seed files one by one by doing: 
+   ```sh
+   npx knex seed:run --specific=01_users_test_data.js
+   ```
+   ```sh
+   npx knex seed:run --specific=01_account_test_data.js
+   ```
+   ```sh
+   npx knex seed:run --specific=01_groups_test_data.js
+   ```
+   ```sh
+   npx knex seed:run --specific=01_memberships_test_data.js
+   ```
+   ```sh
+   npx knex seed:run --specific=01_goals_test_data.js
+   ```
+   ```sh
+   npx knex seed:run --specific=01_consumables_test_data.js
+   ```
+   ```sh
+   npx knex seed:run --specific=01_diets_test_data.js
+   ```
+   ```sh
+   npx knex seed:run --specific=01_exercise_test_data.js
+   ```
+   ```sh
+   npx knex seed:run --specific=01_userhistory_test_data.js
+   ```
+
+**In postgreSQL in your DB, all the tables should be there filled with test data**
