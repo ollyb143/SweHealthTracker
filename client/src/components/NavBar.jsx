@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "../index.css"; 
+import { Link } from "react-router-dom";
+import "../navbar.css"; 
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,7 +9,7 @@ const NavBar = () => {
     <nav className="navbar">
       <div className="nav-container">
         {/* Logo */}
-        <h1 className="logo">Logo</h1>
+        <Link to="/" className="logo">HealthTracker</Link>
 
         {/* Desktop/Laptop Menu */}
         <ul className="nav-links">

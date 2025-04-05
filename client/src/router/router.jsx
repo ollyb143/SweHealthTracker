@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import LandingPage from "../views/pages/LandingPage";  // Adjust path based on file structure
+import LandingPage from "../views/pages/LandingPage"; 
 import ExercisePage from "../views/pages/ExercisePage";
 import FoodDrinkPage from "../views/pages/FoodDrinkPage";
 import GoalsPage from "../views/pages/GoalsPage";
@@ -16,13 +16,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <LoginPage />,
-   /** action: loginController(store), */ 
+    element: <LoginPage />, 
 },
 {
     path: "/register",
     element: <RegisterPage />,
-    /** action: signupController(store), */ 
     
 },
 {

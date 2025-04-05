@@ -1,14 +1,14 @@
 import React from "react";
 import '../../landing.css'
-import NavBar from "../../components/NavBar";
+import Banner from "../../components/Banner";
 import Footer from "../../components/Footer";
 
 const LandingPage = () => {
   return ( 
     <div>
       {/* Navbar */}
-      <NavBar />
-      <main class="landingPage">
+      <Banner />
+      <main className="landingPage">
         <section id="landingText">
           <h1 id="headline">Keep track of your progress.</h1>
           <p>Welcome to the Health Tracker Application<br></br></p>

@@ -61,3 +61,12 @@
     display: inline;
 }
 
+
+/* Error message CSS */
+.loginError {
+    color: red;
+    font-weight: bold;
+    margin-top: 15px; 
+    text-align: center;
+  }
+  
