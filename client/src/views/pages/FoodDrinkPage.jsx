@@ -1,6 +1,7 @@
 import React from "react";
 import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
+
 import '../../foodpage.css'
 
 
@@ -9,18 +10,16 @@ const FoodDrinkPage = () => {
       <div>
       <NavBar />
 
-      <h1 className="foodpage-title">Food Diary</h1>
+     
 
 
       <section className="daily-calories">
-        <h2>Your Calorie Count for Today</h2>
+        <h1>Your Food Diary</h1>
         <progress className="calorie-progress" value="20" max="100">20%</progress>
         <div className="calorie-message">
           <h3>You have consumed 200 calories,</h3>
           <h3>and burned 300 calories. Good job!</h3>
         </div>
-
-
       </section>
 
 
@@ -90,8 +89,6 @@ const FoodDrinkPage = () => {
               <span>Calories: 435</span>
             </div>
           </section>
-    
-          
     
         </div>
 

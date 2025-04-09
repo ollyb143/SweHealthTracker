@@ -4,26 +4,53 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
+    
 }
+
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+
 
 .foodpage-title {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 3%;
+    
 }
+
+
 
 h2 {
     margin: 0 0 12px 0;
 }
 
 .daily-calories{
-    background-color: #ffffff;
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 3%;
     text-align: center;
+}
+
+.daily-calories h1{
+    background: linear-gradient(90deg, #cbfdda,#96bbff);
+	background-size: 200%;
+	animation: gradient 5s ease infinite;
+    border-radius: 12px;
+    height: 120px;
+    line-height: 115px;
 }
 
 .calorie-progress{
@@ -71,7 +98,7 @@ h2 {
 }
 
 .delete-btn {
-    background-color: #61a5ce;
+    background-color: #96bbff;
     color: white;
     border: none;
     padding: 6px 10px;
@@ -81,7 +108,7 @@ h2 {
 }
 
 .delete-btn:hover {
-    background-color: #7be2c4;
+    background-color: #c8f9dc;
 }
 
 
@@ -104,21 +131,23 @@ h2 {
 }
 
 
+
 .add-food-btn,
 .custom-food-btn {
-    background-image: linear-gradient(to right, #81f1c1, #61a4d0);
+    background-color: #9dc5fb;
     color: white;
     padding: 10px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
     width: 100%;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.6s ease;
 }
 
 .add-food-btn:hover,
 .custom-food-btn:hover {
-    background-color: linear-gradient(to right, #61a4d0,  #81f1c1);
+    background-color: #c8f9dc;
+    
 }
 
 
