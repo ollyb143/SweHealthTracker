@@ -1,11 +1,10 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { signupUser, loginUser } from "../store/appUserSlice.js";
+import { signupUser, loginUser } from "../store/appUserSlice";
 
 const REGISTERURL = "http://localhost:3000/api/auth/register";
 const LOGINURL = "http://localhost:3000/api/auth/login";
 
-// Sign up controller
 const signupController = (userData, navigate) => async (dispatch) => {
   try {
     console.log("Sending request to:", REGISTERURL);
@@ -24,7 +23,7 @@ const signupController = (userData, navigate) => async (dispatch) => {
   }
 };
 
-// Login controller
+// authController.js
 const loginController = (userData, navigate) => async (dispatch) => {
     try {
       const response = await axios.post(LOGINURL, userData);
@@ -39,7 +38,7 @@ const loginController = (userData, navigate) => async (dispatch) => {
     } catch (error) {
       const errorMessage = error?.response?.data?.error || 'Login failed!';
       toast.error(errorMessage);
-      return { success: false, message: errorMessage }; 
+      return { success: false, message: errorMessage }; // <-- return error
     }
   };
   

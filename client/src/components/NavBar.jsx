@@ -1,28 +1,37 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import "../navbar.css"; 
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../store/appUserSlice"; // adjust path if needed
+import "../navbar.css";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logoutUser());        // clear Redux state
+    localStorage.removeItem("appUser"); // clear localStorage
+    navigate("/");                 // redirect to landing
+  };
 
   return (
     <nav className="navbar">
       <div className="nav-container">
-        {/* Logo */}
         <Link to="/" className="logo">HealthTracker</Link>
 
-        {/* Desktop/Laptop Menu */}
+        {/* Desktop Menu */}
         <ul className="nav-links">
-          <li><a href="/dashboard">Dashboard</a></li>
-          <li><a href="/fooddrink">Food & Drink</a></li>
-          <li><a href="/exercise">Exercise</a></li>
-          <li><a href="/goals">Goals</a></li>
-          <li><a href="/groups">Groups</a></li>
-          <li><a href="/profile">Profile</a></li>
-          <li><a href="/">Logout</a></li>
+          <li><Link to="/dashboard">Dashboard</Link></li>
+          <li><Link to="/fooddrink">Food & Drink</Link></li>
+          <li><Link to="/exercise">Exercise</Link></li>
+          <li><Link to="/goals">Goals</Link></li>
+          <li><Link to="/groups">Groups</Link></li>
+          <li><Link to="/profile">Profile</Link></li>
+          <li><button className="logout-button" onClick={handleLogout}>Logout</button></li>
         </ul>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Toggle */}
         <button className="nav-menu-button" onClick={() => setIsOpen(!isOpen)}>
           ☰
         </button>
@@ -31,13 +40,13 @@ const NavBar = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <ul className="nav-mobile-menu">
-          <li><a href="/dashboard">Dashboard</a></li>
-          <li><a href="/fooddrink">Food & Drink</a></li>
-          <li><a href="/exercise">Exercise</a></li>
-          <li><a href="/goals">Goals</a></li>
-          <li><a href="/groups">Groups</a></li>
-          <li><a href="/profile">Profile</a></li>
-          <li><a href="/">Logout</a></li>
+          <li><Link to="/dashboard">Dashboard</Link></li>
+          <li><Link to="/fooddrink">Food & Drink</Link></li>
+          <li><Link to="/exercise">Exercise</Link></li>
+          <li><Link to="/goals">Goals</Link></li>
+          <li><Link to="/groups">Groups</Link></li>
+          <li><Link to="/profile">Profile</Link></li>
+          <li><button className="logout-button" onClick={handleLogout}>Logout</button></li>
         </ul>
       )}
     </nav>
