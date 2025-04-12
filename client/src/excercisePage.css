@@ -8,69 +8,104 @@ body {
 
 /* Header */
 .header {
-    background: linear-gradient(to right, #ccfed8, #95b9ff );
+    background: linear-gradient(to right, #ccfed8, #95b9ff);
     text-align: center;
     padding: 20px;
     border-radius: 10px;
     margin: 20px;
 }
 
-/*Form */
-
+/* Form container */
 .container {
     width: 60%;
     margin: auto;
     background: white;
-    padding: 20px;
+    padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.date-time, .exercise-type, .length-input {
-    margin-bottom: 20px;
+/* Date-time, Exercise type, and input fields */
+.date-time,
+.exercise-type,
+.length-input {
+    margin-bottom: 25px;  /* Increased margin to space out form fields */
 }
 
-.data-time > label {
+/* Labels */
+.date-time label,
+.exercise-type label,
+.length-input label {
     font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 8px;
     display: block;
-    margin-bottom: 5px;
 }
 
-.data-time > input {
+/* Input fields */
+.date-time input,
+.exercise-type input,
+.length-input input {
     width: 100%;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 12px;
+    border-radius: 8px;
     border: 1px solid #ccc;
+    font-size: 16px;
     margin-top: 5px;
+    box-sizing: border-box;
 }
 
-/* Excercise buttons */
-
+/* Exercise type buttons */
 .buttons {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 15px;
+    padding-top: 10px;
 }
 
 .type-btn {
-    padding: 10px 20px;
-    border: 1px solid black;
-    border-radius: 5px;
+    padding: 12px 20px;
+    border: 1px solid #427d9d;
+    border-radius: 8px;
     background: white;
     cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Added transition for smooth effect */
+}
+
+.type-btn:hover {
+    background-color: #a8b4c3;  /* Light grey background */
+    color: #161515;  /* Grey text color */
+    border-color: #a4c4fa;  /* Slightly darker border on hover */
 }
 
 /* Log Button */
-
 #log-btn {
     width: 100%;
     background: black;
     color: white;
     padding: 15px;
     border: none;
+    border-radius: 8px;
     cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
 }
 
 #log-btn:hover {
-    background: #333;
+    background-color: #333;
 }
+
+/* Styling for the exercise page form layout */
+.excerise-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between all the form fields */
+}
+
+/* Optional: Add a subtle hover effect for inputs for a better UX */
+input:focus {
+    border-color: #4b90e2;
+    outline: none;
+}
+

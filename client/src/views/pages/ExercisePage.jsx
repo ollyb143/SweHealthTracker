@@ -1,52 +1,97 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
 import "../../excercisePage.css";
 
-
 const ExercisePage = () => {
-    return ( 
-        <div>
-          {/* Navbar */}
-          <NavBar />
-          <div class="container">
-            <div class="header">
-              <h1>Log Exercise</h1>
-              <p>Welcome! This is where you can log your exercise for the day</p>
-            </div>
+  const token = useSelector((state) => state.user.token);
+  const [exercise, setExercise] = useState({ 
+    exerciseType: '', 
+    duration: '', 
+    distance: '', 
+    caloriesBurned: '', 
+    entryDate: '' 
+  });
 
-            <div class="excerise-form">
-              <div class="data-time">
-                <label>Date:</label>
-                <input type="date" id="excercise-date"></input>
+  const handleSubmit = async () => {
+    const res = await fetch('http://localhost:3000/api/exercise', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(exercise)
+    });
 
-                <label>Time:</label>
-                <input type="time" id="excercise-time"></input>
-              </div>
+    const data = await res.json();
+    if (res.ok) alert('Exercise logged');
+    else alert(data.error);
+  };
 
-              <div class="excercise-type">
-                <label>Excercise Type:</label>
-                <div class="buttons">
-                    <button class="type-btn">Walking</button>
-                    <button class="type-btn">Cycling</button>
-                    <button class="type-btn">Swimming</button>
-                    <button class="type-btn">Running</button>
-                    <button class="type-btn">Pilates</button>
-                    <button class="type-btn">Climbing</button>
-                </div>
-                <input type="number" id="length-input" placeholder="Enter length in minutes"></input>
-            </div>
+  return (
+    <div>
+      {/* Navbar */}
+      <NavBar />
+      
+      <div className="container">
+        <div className="header">
+          <h1>Log Exercise</h1>
+          <p>Welcome! This is where you can log your exercise for the day</p>
+        </div>
 
-            <button id="log-btn">Log Excercise</button>
+        <div className="excerise-form">
+          <div className="data-time">
+            <label>Date:</label>
+            <input
+              type="date"
+              value={exercise.entryDate}
+              onChange={(e) => setExercise({ ...exercise, entryDate: e.target.value })}
+            />
+          </div>
+
+          <div className="excercise-type">
+            <label>Exercise Type:</label>
+            <div className="buttons">
+              <button className="type-btn" onClick={() => setExercise({ ...exercise, exerciseType: "walking" })}>Walking</button>
+              <button className="type-btn" onClick={() => setExercise({ ...exercise, exerciseType: "cycling" })}>Cycling</button>
+              <button className="type-btn" onClick={() => setExercise({ ...exercise, exerciseType: "swimming" })}>Swimming</button>
+              <button className="type-btn" onClick={() => setExercise({ ...exercise, exerciseType: "running" })}>Running</button>
+              <button className="type-btn" onClick={() => setExercise({ ...exercise, exerciseType: "pilates" })}>Pilates</button>
+              <button className="type-btn" onClick={() => setExercise({ ...exercise, exerciseType: "climbing" })}>Climbing</button>
             </div>
           </div>
 
+          <input
+            type="number"
+            id="length-input"
+            value={exercise.duration}
+            placeholder="Enter duration in minutes"
+            onChange={(e) => setExercise({ ...exercise, duration: e.target.value })}
+          />
 
-          {/* Footer */}
-          <Footer />
+          <input
+            type="number"
+            placeholder="Distance (km)"
+            value={exercise.distance}
+            onChange={(e) => setExercise({ ...exercise, distance: e.target.value })}
+          />
+
+          <input
+            type="number"
+            placeholder="Calories Burned"
+            value={exercise.caloriesBurned}
+            onChange={(e) => setExercise({ ...exercise, caloriesBurned: e.target.value })}
+          />
+
+          <button id="log-btn" onClick={handleSubmit}>Log Exercise</button>
         </div>
-      );
-  };
-  
+      </div>
+
+      {/* Footer */}
+      <Footer />
+    </div>
+  );
+};
+
 export default ExercisePage;
-  

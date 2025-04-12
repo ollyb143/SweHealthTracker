@@ -74,3 +74,10 @@
     margin-top: 25px;
     color: white;
 }
+
+/* CSS for error messages */
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
