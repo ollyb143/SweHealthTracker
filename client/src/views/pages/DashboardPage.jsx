@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/NavBar";
-import { logout } from "../../../store/userSlice";
+import { logoutUser } from "../../../store/userSlice";
 
 
 const DashboardPage = () => {
