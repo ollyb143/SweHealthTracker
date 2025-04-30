@@ -201,6 +201,7 @@ const RegisterPage = () => {
               Continue
             </button>
           </form>
+
         </section>
       </Card>
       <Footer />
