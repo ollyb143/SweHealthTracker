@@ -1,39 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from 'react-redux';
-import { Link } from "react-router-dom";
-import GradientContainer from "../../components/Gradient";
-import Card from "../../components/Card";
+import React, { useContext } from "react";
 import "../../userdetails.css";
+import { ProfileContext } from "./UserInfoLayout";
 
 
 const ProfilePage = () => {
-  const token = useSelector(state => state.user.token);
-  const [profile, setProfile] = useState(null);
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      const res = await fetch('http://localhost:3000/api/profile', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      const data = await res.json();
-      if (res.ok) setProfile(data);
-    };
-    fetchProfile();
-  }, [token]);
-
-
-  if (!profile) return null;
+  const profile = useContext(ProfileContext);
   
   return (
 
 
+
       <div className="details-container">
-
-      
-      <GradientContainer>
-          <h1>Your Profile</h1>
-      </GradientContainer>
-
       <section className="details">
           <p><strong>Name:</strong> {profile.realname}</p>
           <p><strong>Gender:</strong> {profile.gender}</p>
@@ -43,6 +20,7 @@ const ProfilePage = () => {
           <p><strong>Goal Weight:</strong> {profile.goalWeight} kg</p>
       </section>
       </div>
+
       
 
   );  

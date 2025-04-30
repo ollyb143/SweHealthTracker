@@ -1,11 +1,16 @@
-.gradient-container{
-    background: linear-gradient(90deg, #cbfdda,#96bbff);
+.gradient-container {
+	width: 100%;
+	max-width: 100%;
+	box-sizing: border-box;         
+	margin: auto;              
+	padding: 2rem;                 
+	border-radius: 1rem;
+	background: linear-gradient(90deg, #cbfdda, #96bbff);
 	background-size: 200%;
 	animation: gradient 5s ease infinite;
-    border-radius: 20px;
-    padding: 1.5rem;
-	
-}
+	overflow: hidden;             
+  }
+  
 
 @keyframes gradient {
 	0% {
@@ -18,3 +23,5 @@
 		background-position: 0% 50%;
 	}
 }
+
+

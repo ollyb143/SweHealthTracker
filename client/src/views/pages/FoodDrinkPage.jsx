@@ -12,7 +12,7 @@ const FoodDrinkPage = () => {
       <NavBar />
 
   
-      <Card className="daily-calories">
+      <section className="daily-calories">
         <GradientContainer>
         <h1>Your Food Diary</h1>
         </GradientContainer>   
@@ -21,7 +21,7 @@ const FoodDrinkPage = () => {
           <h3>You have consumed 200 calories,</h3>
           <h3>and burned 300 calories. Good job!</h3>
         </div>
-      </Card>
+      </section>
       
 
 

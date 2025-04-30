@@ -1,6 +1,6 @@
 .link-container {
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
   justify-content: space-around; 
   flex-wrap: wrap;
   width: 80%; 
@@ -10,8 +10,10 @@
 
 .you-card{
   text-align: center;
-  max-width: 70%;
+  max-width: 60%;
+  margin-bottom: 8rem;
 }
+
 
 .link-text{
     display: flex;
@@ -25,15 +27,13 @@
     border: solid;
     border-radius: 30px;
     width: 17rem;
-    height: 3rem;
-    padding: 2rem ;
+  
+    
     
   }
 
 .link-text:hover {
   color: white;
   }
-
-
 
 

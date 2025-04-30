@@ -1,9 +1,9 @@
 import React from 'react';
 import '../gradient.css'; 
 
-const GradientContainer = ({ children }) => {
+const GradientContainer = ({ children, className = ""}) => {
   return (
-    <div className="gradient-container">
+    <div className={`gradient-container ${className}`}>
       {children}
     </div>
   );

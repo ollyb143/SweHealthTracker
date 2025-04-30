@@ -8,13 +8,18 @@ body {
 }
 
 
-h2 {
-    margin: 0 0 12px 0;
-}
+
 
 .daily-calories{
-    max-width: 70%;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex: 1; 
+    min-width: 280px; 
+    box-sizing: border-box;
     text-align: center;
+    margin: 3%;
 
 }
 
