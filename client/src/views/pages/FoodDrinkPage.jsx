@@ -1,7 +1,8 @@
 import React from "react";
 import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
-
+import GradientContainer from "../../components/Gradient";
+import Card from "../../components/Card";
 import '../../foodpage.css'
 
 
@@ -10,17 +11,18 @@ const FoodDrinkPage = () => {
       <div>
       <NavBar />
 
-     
-
-
+  
       <section className="daily-calories">
+        <GradientContainer>
         <h1>Your Food Diary</h1>
+        </GradientContainer>   
         <progress className="calorie-progress" value="20" max="100">20%</progress>
         <div className="calorie-message">
           <h3>You have consumed 200 calories,</h3>
           <h3>and burned 300 calories. Good job!</h3>
         </div>
       </section>
+      
 
 
     

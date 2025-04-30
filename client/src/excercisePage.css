@@ -17,12 +17,7 @@ body {
 
 /* Form container */
 .container {
-    width: 60%;
-    margin: auto;
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 70%;
 }
 
 /* Date-time, Exercise type, and input fields */

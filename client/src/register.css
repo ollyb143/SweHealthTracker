@@ -1,83 +1,71 @@
-#registerMain {
+.register-main {
+    max-width: 80%;
+  }
+  
+  .register-title {
+ 
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .input-grid {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 10%;
-    margin: 25px 5%;
-    padding: 10px;
-    border: solid;
-    
-    background: rgb(129,240,195);
-    background: linear-gradient(90deg, rgba(129,240,195,1) 15%, rgba(98,163,208,1) 55%);
-}
-
-#registerMain > * {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .input-group {
+    flex: 1 1 45%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-}
-
-#enterInfo > input {
-    display: block;
-    text-align: center;
-    width: 100%;
-    height: 25px;
-    border-radius: 25px;
-    font-size: 15px;
-}
-
-#enterInfo > label {
-    align-self: normal;
-    margin-top: 10px;
-}
-
-#enterInfo {
-    display: inline-flex;
-}
-
-#additionalInfo > input{
-    display: block;
-    text-align: center;
-    width: 100%;
-    height: 25px;
-    border-radius: 25px;
-    font-size: 15px;
-}
-
-#additionalInfo > label {
-    align-self: normal;
-    margin-top: 10px;
-}
-
-#additionalInfo > select {
-    display: block;
-    text-align: center;
-    width: 100%;
-    height: 30px;
-    border-radius: 25px;
-    font-size: 15px;
-    border: solid;
-    border-width: 1px;
-}
-
-#additionalInfo > button {
-    display: block;
-    justify-self: center;
-    text-align: center;
-    margin: 10px;
-    width: 50%;
-    height: 15%;
-    border-radius: 25px;
-    font-size: 15px;
-    background: black;
-    margin-top: 25px;
-    color: white;
-}
-
-/* CSS for error messages */
-.error {
-    color: red;
-    font-size: 12px;
-    margin-top: 5px;
   }
+  
+  .input-group label {
+    margin: 0.4rem 0.2rem;
+    
+  }
+  
+  .input-field {
+    padding: 0.5rem;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    font-size: rem;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  
+   .error {
+    color: red;
+    margin-top: 1rem;
+    font-weight: bold;
+  }
+  
+  .continue-button {
+    display: block;
+    margin: 2rem auto 0;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    background: white;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  }
+  
+  .continue-button:hover {
+    background-color: #a8b4c3;  
+
+
+  }
+  
+  @media (max-width: 600px) {
+    .input-group {
+      flex: 1 1 100%;
+    }
+  }
+  
+
+  
+  
+  

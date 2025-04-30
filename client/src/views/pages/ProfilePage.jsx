@@ -1,34 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from 'react-redux';
-import Navbar from "../../components/NavBar";
-import Footer from "../../components/Footer";
+import React, { useContext } from "react";
+import "../../userdetails.css";
+import { ProfileContext } from "./UserInfoLayout";
+
 
 const ProfilePage = () => {
-  const token = useSelector(state => state.user.token);
-  const [profile, setProfile] = useState(null);
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      const res = await fetch('http://localhost:3000/api/profile', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      const data = await res.json();
-      if (res.ok) setProfile(data);
-    };
-    fetchProfile();
-  }, [token]);
-
+  const profile = useContext(ProfileContext);
+  
   return (
-    <div>
-            <Navbar />
-      <h1>Your Profile</h1>
-      {profile ? (
-        <pre>{JSON.stringify(profile, null, 2)}</pre>
-      ) : (
-        <p>Loading...</p>
-      )}
-            <Footer />
-    </div>
-  );
+
+
+
+      <div className="details-container">
+      <section className="details">
+          <p><strong>Name:</strong> {profile.realname}</p>
+          <p><strong>Gender:</strong> {profile.gender}</p>
+          <p><strong>Date of Birth:</strong> {new Date(profile.dob).toLocaleDateString()}</p>
+          <p><strong>Height:</strong> {profile.height} cm</p>
+          <p><strong>Weight:</strong> {profile.weight} kg</p>
+          <p><strong>Goal Weight:</strong> {profile.goalWeight} kg</p>
+      </section>
+      </div>
+
+      
+
+  );  
 };
+
 export default ProfilePage;

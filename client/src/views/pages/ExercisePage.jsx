@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
+import Card from "../../components/Card"
 import "../../excercisePage.css";
 
 const ExercisePage = () => {
@@ -34,7 +35,7 @@ const ExercisePage = () => {
       {/* Navbar */}
       <NavBar />
       
-      <div className="container">
+      <Card className="container">
         <div className="header">
           <h1>Log Exercise</h1>
           <p>Welcome! This is where you can log your exercise for the day</p>
@@ -86,7 +87,7 @@ const ExercisePage = () => {
 
           <button id="log-btn" onClick={handleSubmit}>Log Exercise</button>
         </div>
-      </div>
+      </Card>
 
       {/* Footer */}
       <Footer />
