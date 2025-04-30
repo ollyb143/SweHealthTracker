@@ -27,7 +27,7 @@ const NavBar = () => {
           <li><Link to="/exercise">Exercise</Link></li>
           <li><Link to="/goals">Goals</Link></li>
           <li><Link to="/groups">Groups</Link></li>
-          <li><Link to="/profile">Profile</Link></li>
+          <li><Link to="/aboutyou">Profile</Link></li>
           <li><button className="logout-button" onClick={handleLogout}>Logout</button></li>
         </ul>
 
@@ -45,7 +45,7 @@ const NavBar = () => {
           <li><Link to="/exercise">Exercise</Link></li>
           <li><Link to="/goals">Goals</Link></li>
           <li><Link to="/groups">Groups</Link></li>
-          <li><Link to="/profile">Profile</Link></li>
+          <li><Link to="/aboutyou">Profile</Link></li>
           <li><button className="logout-button" onClick={handleLogout}>Logout</button></li>
         </ul>
       )}

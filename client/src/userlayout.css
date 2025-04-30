@@ -1,0 +1,39 @@
+.link-container {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-around; 
+  flex-wrap: wrap;
+  width: 80%; 
+  margin: 2rem auto ;
+
+}
+
+.you-card{
+  text-align: center;
+  max-width: 70%;
+}
+
+.link-text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s ease;
+    border: solid;
+    border-radius: 30px;
+    width: 17rem;
+    height: 3rem;
+    padding: 2rem ;
+    
+  }
+
+.link-text:hover {
+  color: white;
+  }
+
+
+
+

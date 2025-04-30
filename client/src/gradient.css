@@ -2,10 +2,9 @@
     background: linear-gradient(90deg, #cbfdda,#96bbff);
 	background-size: 200%;
 	animation: gradient 5s ease infinite;
-    border-radius: 12px;
-    height: 120px;
-    line-height: 115px;
-
+    border-radius: 20px;
+    padding: 1.5rem;
+	
 }
 
 @keyframes gradient {

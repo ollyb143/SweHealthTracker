@@ -7,6 +7,8 @@ import GroupsPage from "../views/pages/GroupsPage";
 import LoginPage from "../views/pages/LoginPage";
 import RegisterPage from "../views/pages/RegisterPage";
 import DashboardPage from "../views/pages/DashboardPage";
+import UserInfoLayout from "../views/pages/UserInfoLayout";
+import AccountPage from "../views/pages/AccountPage";
 import ProfilePage from "../views/pages/ProfilePage";
 
 export const router = createBrowserRouter([
@@ -44,7 +46,21 @@ export const router = createBrowserRouter([
     element: <DashboardPage />,
 },
 {
-    path: "/profile",
-    element: <ProfilePage />,
+    path: "/aboutyou",
+    element: <UserInfoLayout />,
+    children:[
+    
+        {
+            path: "account",
+            element: <AccountPage />
+        },
+
+        {
+            path: "profile",
+            element: <ProfilePage />
+        }
+
+      
+    ]
 },
 ]);

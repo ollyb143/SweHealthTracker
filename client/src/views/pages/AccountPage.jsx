@@ -5,8 +5,7 @@ import GradientContainer from "../../components/Gradient";
 import Card from "../../components/Card";
 import "../../userdetails.css";
 
-
-const ProfilePage = () => {
+const AccountPage = () => {
   const token = useSelector(state => state.user.token);
   const [profile, setProfile] = useState(null);
 
@@ -21,31 +20,21 @@ const ProfilePage = () => {
     fetchProfile();
   }, [token]);
 
-
   if (!profile) return null;
-  
+
   return (
-
-
-      <div className="details-container">
-
-      
+    <div className="details-container">
       <GradientContainer>
-          <h1>Your Profile</h1>
+        <h1>Your Account</h1>
       </GradientContainer>
 
       <section className="details">
-          <p><strong>Name:</strong> {profile.realname}</p>
-          <p><strong>Gender:</strong> {profile.gender}</p>
-          <p><strong>Date of Birth:</strong> {new Date(profile.dob).toLocaleDateString()}</p>
-          <p><strong>Height:</strong> {profile.height} cm</p>
-          <p><strong>Weight:</strong> {profile.weight} kg</p>
-          <p><strong>Goal Weight:</strong> {profile.goalWeight} kg</p>
+        <p><strong>Username:</strong> {profile.username}</p>
+        <p><strong>Email:</strong> {profile.email}</p>
+        <p>Change your password</p>
       </section>
-      </div>
-      
-
-  );  
+    </div>
+  );
 };
 
-export default ProfilePage;
+export default AccountPage;
