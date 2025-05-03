@@ -82,8 +82,8 @@ const RegisterPage = () => {
           </GradientContainer>
 
           <form onSubmit={handleSubmit}>
-            <div className="input-grid">
-              <div className="input-group">
+            <div className="register-box">
+              <div className="register-row">
                 <label htmlFor="realname">Full Name:</label>
                 <input
                   type="text"
@@ -95,7 +95,7 @@ const RegisterPage = () => {
                 />
               </div>
 
-              <div className="input-group">
+              <div className="register-row">
                 <label htmlFor="username">Username:</label>
                 <input
                   type="text"
@@ -107,7 +107,7 @@ const RegisterPage = () => {
                 />
               </div>
 
-              <div className="input-group">
+              <div className="register-row">
                 <label htmlFor="email">Email:</label>
                 <input
                   type="email"
@@ -119,7 +119,7 @@ const RegisterPage = () => {
                 />
               </div>
 
-              <div className="input-group">
+              <div className="register-row">
                 <label htmlFor="password">Password:</label>
                 <input
                   type="password"
@@ -131,7 +131,7 @@ const RegisterPage = () => {
                 />
               </div>
 
-              <div className="input-group">
+              <div className="register-row">
                 <label htmlFor="dob">Date of Birth:</label>
                 <input
                   type="date"
@@ -143,7 +143,7 @@ const RegisterPage = () => {
                 />
               </div>
 
-              <div className="input-group">
+              <div className="register-row">
                 <label htmlFor="gender">Gender:</label>
                 <select
                   name="gender"
@@ -160,7 +160,7 @@ const RegisterPage = () => {
                 </select>
               </div>
 
-              <div className="input-group">
+              <div className="register-row">
                 <label htmlFor="height">Height (cm):</label>
                 <input
                   type="number"
@@ -172,7 +172,7 @@ const RegisterPage = () => {
                 />
               </div>
 
-              <div className="input-group">
+              <div className="register-row">
                 <label htmlFor="weight">Weight (Kg):</label>
                 <input
                   type="number"
@@ -184,7 +184,7 @@ const RegisterPage = () => {
                 />
               </div>
 
-              <div className="input-group">
+              <div className="register-row">
                 <label htmlFor="goalWeight">Goal Weight (Kg) (optional):</label>
                 <input
                   type="number"

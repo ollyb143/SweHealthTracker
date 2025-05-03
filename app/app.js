@@ -8,6 +8,7 @@ import profileRoutes from './routes/profileRoutes.js';
 
 dotenv.config();
 
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -32,5 +33,10 @@ app.listen(port, () => {
 });
 
 app.use((req, res) => {
-  res.status(400).send("hello");
+  res.status(404).json({ error: "Route not found" });
+});
+
+app.use((err, req, res, next) => {
+  console.error("[Server Error]", err.stack);
+  res.status(500).json({ error: "Internal server error" });
 });

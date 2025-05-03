@@ -2,13 +2,13 @@
 
 .you-card{
   text-align: center;
-  max-width: 60%;
+  max-width: 50%;
   margin-bottom: 8rem;
 }
 
 .tab-button-container {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.7rem;
   justify-content: space-around; 
   flex-wrap: wrap;
   width: 80%; 
@@ -31,37 +31,37 @@
 }
 
 .tab-button:hover {
-  background-color: #000000;
+  background-color: #82dce2;
   color: rgb(255, 255, 255);
   transform: translateY(-5px);
 }
 
 .tab-button.active {
-  background-color: #000000;
+  background-color: #82dce2;
   color: white;
   font-weight: bold;
 }
 
 .edit-button{
-  background-color: #000000;
-  color: #f0f0f0;
+  background-color: #ffffff;
+  color: black;
   border: solid;
   border-width: 1px;
   border-color: #ccc;
   padding: 0.75rem 1.5rem;
-  border-radius: 30px; 
+  border-radius: 50px; 
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  min-width: 10rem;
-    
+  margin-top: 1rem;
+  min-width: 11rem;
 }
+
+
 .edit-button:hover {
-  background-color: #ffffff;
-  color: rgb(63, 63, 63);
-
-  
-
+  background-color: #82dce2;
+  border-color: #82dce2;
+  color: white;
 }
 
 
@@ -79,9 +79,9 @@
     display: flex;
     flex-direction: column; 
     gap: 0.5rem;             
-    padding: 0.rem;
+   
     animation: fadeInDown 1s ease forwards;
-    justify-content: left;
+    justify-content: center;
     width: 100%;
 }
 
@@ -96,21 +96,27 @@
     }
 } 
 
-.input-row {
+.profile-row {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  margin-bottom: 1rem;
-  gap: 1rem;
-  width: 100%; 
+  margin-bottom: 0.9rem;
+  width: 100%;
+  animation: fadeInDown 1s ease forwards;
+  margin-top: 0.3rem;
 }
 
-.input-row label {
-  width: 120px; 
+.profile-row label {
+  width: 100px; 
   font-weight: 600;
-  text-align: right;
+  font-size: 1rem;
+  text-align: center;
+  animation: fadeInDown 1s ease forwards;
+  margin-bottom: 0.1rem;
+  margin-top: 0.3rem;
 }
 
-.input-row input {
+.input-field {
   flex: 1;
   padding: 0.6rem 1rem;
   border: 1px solid #ccc;
@@ -119,14 +125,35 @@
   width: 100%;
   box-sizing: border-box;
   transition: border-color 0.2s ease;
+  text-align: center;
 }
 
-.input-row input:focus {
+.profile-row select{
+  flex: 1;
+  padding: 0.6rem 1rem;
+  padding-left: 1.7rem;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+  text-align: center;
+}
+
+.profile-row input:focus{
   outline: none;
-  border-color: #66afe9;
-  box-shadow: 0 0 0 2px rgba(102, 175, 233, 0.2);
+  border-color: #82dce2;
+ 
+}
+
+.profile-row select:focus{
+  outline: none;
+  border-color: #82dce2;
+ 
 }
 
 
 
   
+ 

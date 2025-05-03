@@ -9,19 +9,33 @@
     text-align: center;
   }
   
-  .input-grid {
+  .register-box {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
   }
   
-  .input-group {
+  .register-row {
     flex: 1 1 45%;
     display: flex;
     flex-direction: column;
   }
+
+
+.register-row input:focus{
+  outline: none;
+  border-color: #82dce2;
+ 
+}
+
+.register-row select:focus{
+  outline: none;
+  border-color: #82dce2;
+ 
+}
+
   
-  .input-group label {
+  .register-row label {
     margin: 0.4rem 0.2rem;
     
   }
@@ -56,18 +70,18 @@
   }
   
   .continue-button:hover {
-    background-color: #acd6ef;  
-
-
+    background-color: #82dce2;
+    border-color: #82dce2;
+    color: white;
   }
   
   @media (max-width: 600px) {
-    .input-group {
+    .register-row {
       flex: 1 1 100%;
     }
   }
   
 
   
-  
+   
   
