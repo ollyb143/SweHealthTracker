@@ -4,7 +4,9 @@ import Navbar from "../../components/NavBar";
 import Footer from "../../components/Footer";
 import Card from "../../components/Card";
 import GradientContainer from "../../components/Gradient";
+import Buttoncomponent from "../../components/Buttoncomponent";
 import "../../userinfo.css";
+
 
 const UserInfoPage = () => {
   const token = useSelector(state => state.user.token);
@@ -136,7 +138,7 @@ const UserInfoPage = () => {
       </div>
     );
   }
-
+ 
   return (
     <div>
       <Navbar />
@@ -144,19 +146,21 @@ const UserInfoPage = () => {
         <GradientContainer>
           <h1>All About You</h1>
           <div className="tab-button-container">
-            <button
+            <Buttoncomponent
+              variant="secondary"
               className={`tab-button ${activeTab === "account" ? "active" : ""}`}
               onClick={() => setActiveTab("account")}
             >
               Your Account
-            </button>
+            </Buttoncomponent>
 
-            <button
+            <Buttoncomponent
+            variant="secondary"
               className={`tab-button ${activeTab === "profile" ? "active" : ""}`}
               onClick={() => setActiveTab("profile")}
             >
               Your Profile
-            </button>
+            </Buttoncomponent>
           </div>
         </GradientContainer>
 
@@ -287,9 +291,9 @@ const UserInfoPage = () => {
         </div>
 
         <div className="input-row">
-          <button className="edit-button" onClick={isEditing ? saveProfile : toggleEdit}>
+          <Buttoncomponent className="edit-button" onClick={isEditing ? saveProfile : toggleEdit}>
             {isEditing ? "Save" : "Edit"}
-          </button>
+          </Buttoncomponent>
         </div>
       </Card>
       <Footer />

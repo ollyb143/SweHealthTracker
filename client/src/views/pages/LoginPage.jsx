@@ -5,6 +5,9 @@ import { setToken } from "../../../store/userSlice";
 import "../../login.css";
 import Footer from "../../components/Footer";
 import Banner from "../../components/Banner";
+import GradientContainer from "../../components/Gradient";
+import Card from "../../components/Card";
+import Buttoncomponent from "../../components/Buttoncomponent";
 
 const LoginPage = () => {
   const [form, setForm] = useState({ username: "", password: "" });
@@ -49,51 +52,60 @@ const LoginPage = () => {
   return (
     <div>
       <Banner />
-      <main id="loginMain">
-        <section id="welcomeSection">
-          <h1 id="welcome">WELCOME</h1>
-          <p>Welcome to your Health Tracker App</p>
+    
+        <Card className="welcome-card">
+        <GradientContainer id="welcomeSection">
+          <h1 id="welcome">Welcome back to Health Tracker</h1>
+
           <br />
           <p>Where you can track your health and fitness progress all in one place.</p>
-        </section>
+        </GradientContainer>
 
         <section id="logInSection">
-          <h1 id="signIn">Sign In</h1>
+  
           <p id="signUpText">
             If you do not have an account already, you can sign up{" "}
             <a href="/register">here.</a>
           </p>
+          
 
+
+          
           <form onSubmit={handleSubmit}>
+            <div className="login-row ">
             <input
               type="text"
-              className="signInInput"
+              className="input-field"
               placeholder="Username"
               name="username"
               value={form.username}
               onChange={handleChange}
               required
             />
+            </div>
 
+            <div className="login-row ">
             <input
               type="password"
-              className="signInInput"
+              className="input-field"
               placeholder="Password"
               name="password"
               value={form.password}
               onChange={handleChange}
               required
             />
+            </div>
 
-            <button id="signInButton" type="submit">
+            <Buttoncomponent variant="primary" className="edit-button" type="submit">
               Sign in
-            </button>
+            </Buttoncomponent>
 
             {/* Error message */}
             {error && <p className="loginError">{error}</p>}
           </form>
         </section>
-      </main>
+        </Card>
+
       <Footer />
     </div>
   );

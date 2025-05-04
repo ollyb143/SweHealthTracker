@@ -40,14 +40,7 @@
     
   }
   
-  .input-field {
-    padding: 0.5rem;
-    border-radius: 25px;
-    border: 1px solid #ccc;
-    font-size: rem;
-    text-align: center;
-    box-sizing: border-box;
-  }
+ 
 
   
    .error {
@@ -84,4 +77,4 @@
 
   
    
-  
+    

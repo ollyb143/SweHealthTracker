@@ -1,0 +1,43 @@
+.buttoncomponent{
+    padding: 1rem 1.5rem;
+    border-radius: 50px; 
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    min-width: 10rem;
+  }
+
+  .primary{
+
+    background-color: #ffffff;
+    color: black;
+    border: solid;
+    border-width: 1px;
+    border-color: #ccc;
+
+  }
+  
+  
+  .primary:hover {
+    background-color: #82dce2;
+    border-color: #82dce2;
+    color: white;
+  }
+  
+  .secondary{
+    background-color: #ffffff;
+    border: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    min-width: 10rem;
+
+  }
+
+  .secondary:hover{
+
+    background-color: #82dce2;
+    color: rgb(255, 255, 255);
+    transform: translateY(-5px);
+
+  }

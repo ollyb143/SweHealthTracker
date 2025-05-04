@@ -1,71 +1,28 @@
-#loginMain {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 5%;
+.welcome-card{
+    text-align: center;
+    max-width: 60%;
+  
+
 }
 
-#welcomeSection {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-style: solid;
-    align-self: center;
-    width: 40%;
-    padding: 10px;
-    margin: 10px;
-    background: rgb(129,240,195);
-    background: linear-gradient(90deg, rgba(129,240,195,1) 15%, rgba(98,163,208,1) 55%);
-}
+
 
 #logInSection {
-    display: inline-block;
-    margin: 10px;
-    align-items: center;
+
+    margin-top: 2rem;
+
 }
 
-#logInSection > h1 {
-    text-align: center;
+.login-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0.9rem;
+  width: 100%;
+  margin-top: 0.3rem;
 }
 
-.signInInput {
-    display: block;
-    justify-self: center;
-    text-align: center;
-    margin: 10px;
-    width: 100%; /* Full width to match the container */
-    height: 40px; /* Adjusted height for a better look */
-    border-radius: 25px; /* Rounded corners */
-    font-size: 15px;
-    font-weight: 700;
-    padding-left: 20px; /* Add padding for text spacing */
-    border: 2px solid #929292; /* Light border color */
-    box-sizing: border-box; /* Ensure padding and borders don't mess up the width */
-}
 
-.signInInput:focus {
-    border-color: #5d74ae; /* Highlighted border color when focused */
-    outline: none; /* Remove default outline */
-}
-
-.signInInput::placeholder {
-    color: #aaa; /* Lighter color for placeholder text */
-}
-
-#signInButton {
-    display: block;
-    justify-self: center;
-    text-align: center;
-    margin: 10px;
-    width: 85%;
-    height: 15%;
-    border-radius: 25px;
-    font-size: 15px;
-    font-weight: 700;
-    background: black;
-    margin-top: 25px;
-    color: white;
-}
 
 #logInSection > a, p {
     display: inline;
@@ -78,3 +35,4 @@
     margin-top: 15px; /* Space between button and error message */
     text-align: center;
 }
+ 
