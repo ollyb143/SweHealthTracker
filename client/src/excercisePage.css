@@ -1,4 +1,4 @@
-/* General styles */
+
 body {
     font-family: Arial, sans-serif;
     background: #f8f8f8;
@@ -6,7 +6,7 @@ body {
     padding: 0;
 }
 
-/* Header */
+
 .header {
     background: linear-gradient(to right, #ccfed8, #95b9ff);
     text-align: center;
@@ -15,19 +15,19 @@ body {
     margin: 20px;
 }
 
-/* Form container */
+
 .container {
     max-width: 70%;
 }
 
-/* Date-time, Exercise type, and input fields */
+
 .date-time,
 .exercise-type,
 .length-input {
     margin-bottom: 25px;  /* Increased margin to space out form fields */
 }
 
-/* Labels */
+
 .date-time label,
 .exercise-type label,
 .length-input label {
@@ -37,7 +37,7 @@ body {
     display: block;
 }
 
-/* Input fields */
+
 .date-time input,
 .exercise-type input,
 .length-input input {
@@ -50,7 +50,7 @@ body {
     box-sizing: border-box;
 }
 
-/* Exercise type buttons */
+
 .buttons {
     display: flex;
     flex-wrap: wrap;
@@ -74,7 +74,7 @@ body {
     border-color: #a4c4fa;  /* Slightly darker border on hover */
 }
 
-/* Log Button */
+
 #log-btn {
     width: 100%;
     background: black;
@@ -91,16 +91,11 @@ body {
     background-color: #333;
 }
 
-/* Styling for the exercise page form layout */
+
 .excerise-form {
     display: flex;
     flex-direction: column;
     gap: 20px; /* Space between all the form fields */
 }
 
-/* Optional: Add a subtle hover effect for inputs for a better UX */
-input:focus {
-    border-color: #4b90e2;
-    outline: none;
-}
 
