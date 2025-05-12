@@ -16,3 +16,7 @@
   text-align: center;
 }
 
+input:focus{
+  outline: none;
+  border-color: #82dce2;
+}

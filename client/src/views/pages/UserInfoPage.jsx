@@ -282,6 +282,9 @@ const UserInfoPage = () => {
                     <label>Weight</label> {profile.weight} kg
                   </p>
                   <p className="profile-row">
+                    <label>BMI</label> {profile.BMI?.toFixed(1) || "N/A"}
+                  </p>
+                  <p className="profile-row">
                     <label>Goal Weight</label> {profile.goalWeight} kg
                   </p>
                 </div>
@@ -302,3 +305,4 @@ const UserInfoPage = () => {
 };
 
 export default UserInfoPage;
+ 

@@ -7,7 +7,7 @@
 	border-radius: 1rem;
 	background: linear-gradient(90deg, #cbfdda, #96bbff);
 	background-size: 200%;
-	animation: gradient 5s ease infinite;
+	animation: gradient 10s ease infinite;
 	overflow: hidden;             
   }
   
