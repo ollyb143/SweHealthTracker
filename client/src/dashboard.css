@@ -1,0 +1,86 @@
+.weight-card{
+    text-align: center;
+    max-width: 80%;
+    margin-bottom: 6rem;
+    padding: 3rem;
+
+}
+
+.weight-title{
+    margin-bottom: 1.5rem;
+
+}
+
+
+.weight-information{
+    display: flex ;
+    gap: 4rem;
+    margin: 0.4rem 1.7rem;
+    justify-content: center;
+
+}
+
+.weight-ul{
+    list-style-type: none;
+}
+
+.weight-entry{
+    margin-top: 1.2rem;
+}
+
+.weight-delete{
+    background-color: #ffffff;
+    color: #79d5db;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    min-width: 2rem;
+    margin-left: 1rem;
+    font-weight: 1000;
+  
+ 
+
+}
+
+.weight-delete:hover{
+    background-color:#83dce2;
+    color: white;
+}
+
+
+.weight-logs, .weight-logger {
+    flex: 1;
+    background-color: #f8f8f8;
+    padding: 1rem;
+    box-sizing: border-box;
+    border-radius: 1rem;
+    height: 15rem;
+    
+  }
+
+.weight-logs{
+    overflow-y: auto; 
+}
+
+.log-your-weight{
+    margin-bottom: 0.8rem;
+}
+
+
+
+
+
+
+@media (max-width: 768px) {
+    .weight-information {
+      flex-direction: column;
+      align-items: center; 
+    }
+
+    .weight-logs, .weight-logger {
+        max-height: 16rem;
+        min-width: 100%;
+      }
+}

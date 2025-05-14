@@ -4,6 +4,8 @@
     box-sizing: border-box;
   }
 /*css reset*/
+
+
 .input-field {
   flex: 1;
   padding: 0.6rem 1rem;
@@ -16,3 +18,7 @@
   text-align: center;
 }
 
+input:focus{
+  outline: none;
+  border-color: #82dce2;
+}

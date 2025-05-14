@@ -4,12 +4,20 @@
 import db from '../db/db.js';
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
+import { calculateBMI } from '../utils/bmi.js';
+
 
 const JWT_SECRET = "secret";
 
 export const register = async (req, res) => {
     try {
-      const { realname, height, weight, dob, gender, BMI, goalWeight, username, email, password } = req.body;
+      const { realname, height, weight, dob, gender, goalWeight, username, email, password } = req.body;
+      const BMI = calculateBMI(weight, height);
+      console.log("[Backend] Weight:", weight, "[Backend] Height:", height);
+      console.log("[Backend] Calculated BMI during registration:", BMI);
+
+
+
       const hashedPassword = crypto.createHash('md5').update(password).digest('hex');
   
       const [userID] = await db('users').insert({ realname, height, weight, dob, gender, BMI, goalWeight }).returning('userID');
@@ -22,7 +30,7 @@ export const register = async (req, res) => {
       console.error('Registration Error:', err);
       res.status(500).json({ error: err.message });
     }
-  };
+  };  
   
   export const login = async (req, res) => {
     try {
@@ -38,4 +46,4 @@ export const register = async (req, res) => {
       console.error('Login Error:', err);
       res.status(500).json({ error: err.message });
     }
-  };
+  };  
