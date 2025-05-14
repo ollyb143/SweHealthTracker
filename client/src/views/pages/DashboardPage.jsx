@@ -8,6 +8,16 @@ import GradientContainer from "../../components/Gradient";
 import Buttoncomponent from "../../components/Buttoncomponent"
 import { logoutUser } from "../../../store/userSlice";
 import "../../dashboard.css";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
+  ResponsiveContainer,
+} from 'recharts';
+
 
 
 const DashboardPage = () => {
@@ -123,13 +133,20 @@ const DashboardPage = () => {
     }
   };
 
-      
-
+    
  
   useEffect(() => {
     if (token) fetchWeightHistory();
   }, [token]);
 
+
+  const formattedWeightData = [...weightHistory].sort((a, b)=> new Date(a.date)-new Date(b.date)).map
+  (log => ({
+
+    date: new Date(log.date).toLocaleDateString(), 
+    weight: log.weight
+  }));
+  
   
 
  
@@ -177,37 +194,66 @@ const DashboardPage = () => {
         </section>
 
         <div>
-          <Card className="weight-container">
+          <Card className="weight-card">
 
           <GradientContainer className="weight-title"><h1>Weight Log</h1></GradientContainer>
 
-          
+          {formattedWeightData.length > 0 && (
+          <div>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={formattedWeightData} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="date" />
+              <YAxis />
+              <Tooltip />
+              <Line type="monotone" dataKey="weight" stroke="#8884d8" />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+          )}
 
-          
 
-            <input type="number"
-                  value={weightInput}
-                  onChange={(e) => setWeightInput(e.target.value)}
-                  placeholder="Enter your weight (kg)"
-                  className="input-field"
-            />
 
-            <Buttoncomponent onClick={handleLogWeight}>Log Weight</Buttoncomponent>
         
 
-       
-        <details className="weight-logs">
-          <summary className="weight-summary">View your weight logs</summary>
-        <ul className="weight-ul">
-        {weightHistory.map((log, index) => (
-          <li className="weight-entry" key={index}>
-            
-            {new Date(log.date).toLocaleDateString()} — {log.weight} kg
-            <button className="weight-delete"onClick={() => handleDeleteWeight(log.weightID)}>✖</button>
-          </li>
-        ))}
-        </ul>
-        </details>
+        
+        
+
+          <div className="weight-logs">
+
+            <div className="weight-log-column">
+          
+            <details>
+            <summary className="weight-summary">View your weight logs</summary>
+            <ul className="weight-ul">
+            {weightHistory.map((log, index) => (
+              <li className="weight-entry" key={index}>
+                
+                {new Date(log.date).toLocaleDateString()} — {log.weight} kg
+                <button className="weight-delete"onClick={() => handleDeleteWeight(log.weightID)}>✖</button>
+              </li>
+            ))}
+            </ul>
+            </details>
+
+            </div>
+
+
+            <div className="weight-log-column">
+            <details>
+            <summary className="weight-summary">Log your weight</summary>
+            <input type="number"
+                      value={weightInput}
+                      onChange={(e) => setWeightInput(e.target.value)}
+                      placeholder="Enter your weight (kg)"
+                      className="input-field"
+                />
+
+            <Buttoncomponent onClick={handleLogWeight}>Log Weight</Buttoncomponent>
+            </details>
+            </div>
+          </div>
+
 
           </Card>
         </div>
