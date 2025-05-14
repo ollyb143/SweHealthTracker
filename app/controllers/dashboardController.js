@@ -1,22 +1,56 @@
 import db from '../db/db.js';
 
 export const logWeight = async (req, res) => {
+
   const { userID } = req.user;
-  const { weight } = req.body;
+  const { weight, date } = req.body;
 
   if (!weight) return res.status(400).json({ message: "Weight is required" });
 
+
+  const parsedWeight = parseFloat(weight);
+  if (isNaN(parsedWeight)) {
+    return res.status(400).json({ message: "Weight must be a valid number" });
+  }
+
+  
+  if (parsedWeight < 20 || parsedWeight > 635) {
+    return res.status(400).json({ message: "Weight must be between 20kg and 635kg" });
+  }
+
+ 
+  const logDate = date ? new Date(date) : new Date();
+  if (isNaN(logDate.getTime())) {
+    return res.status(400).json({ message: "Invalid date" });
+  }
+
+  const currentDate = new Date();
+  if (logDate > currentDate) {
+    return res.status(400).json({ message: "Cannot log weight for a future date" });
+  }
+
+  
   try {
+ 
     await db('weight').insert({
       userID,
       weight,
-      date: new Date()
+      date: logDate,
     });
 
-    await db('users').where({ userID }).update({ weight });
+  
+    const isToday =
+      logDate.getFullYear() === currentDate.getFullYear() &&
+      logDate.getMonth() === currentDate.getMonth() &&
+      logDate.getDate() === currentDate.getDate();
 
+    if (isToday) {
+      await db('users').where({ userID }).update({ weight: parsedWeight });
+    }
 
+  
     res.status(201).json({ message: "Weight logged successfully" });
+
   } catch (err) {
     console.error("Log Weight Error:", err);
     res.status(500).json({ error: "Failed to log weight" });

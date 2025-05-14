@@ -27,6 +27,9 @@ const DashboardPage = () => {
   const dispatch = useDispatch();
   const [weightInput, setWeightInput] = useState('');
   const [weightHistory, setWeightHistory] = useState([]);
+  const [dateInput, setDateInput] = useState(""); 
+  const [weightError, setWeightError] = useState('');
+
 
   useEffect(() => {
     if (!token) {
@@ -86,9 +89,35 @@ const DashboardPage = () => {
       setWeightHistory([]); 
     }
   };
+
+
   
   const handleLogWeight = async () => {
-    if (!weightInput) return;
+
+
+    const selectedDate = new Date(dateInput);
+    const currentDate = new Date();
+    const parsedWeight = parseFloat(weightInput);
+
+
+    if (!weightInput) {
+      setWeightError("Weight is required.");
+      return;
+    }
+
+
+    if (selectedDate > currentDate) {
+      setWeightError("You cannot log weight for a future date");
+      return;
+    }
+
+    if (parsedWeight <= 20 || parsedWeight > 700) {
+      setWeightError("Weight must be between 20 and 700 kg.");
+      return;
+    }
+
+    
+    
 
     try {
       const res = await fetch('http://localhost:3000/api/dashboard/logWeight', {
@@ -97,12 +126,16 @@ const DashboardPage = () => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify({ weight: parseFloat(weightInput) })
+        body: JSON.stringify({ weight: parseFloat(weightInput), date: dateInput })
       });
 
       if (res.ok) {
         setWeightInput('');
+        setDateInput('');
+        setWeightError('');
         fetchWeightHistory(); 
+
+        console.log('Weight log added successfully');
       } else {
         console.warn('Failed to log weight');
       }
@@ -193,6 +226,9 @@ const DashboardPage = () => {
           </table>
         </section>
 
+
+        
+
         <div>
           <Card className="weight-card">
 
@@ -206,7 +242,7 @@ const DashboardPage = () => {
               <XAxis dataKey="date" />
               <YAxis />
               <Tooltip />
-              <Line type="monotone" dataKey="weight" stroke="#8884d8" />
+              <Line type="monotone" dataKey="weight" stroke="#82dce1" strokeWidth={3} />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -219,12 +255,16 @@ const DashboardPage = () => {
         
         
 
-          <div className="weight-logs">
+          <div className="weight-information">
 
-            <div className="weight-log-column">
+            
+
+            <div className="weight-logs">
+            <h4>Your weight logs</h4>
+              
           
-            <details>
-            <summary className="weight-summary">View your weight logs</summary>
+            
+
             <ul className="weight-ul">
             {weightHistory.map((log, index) => (
               <li className="weight-entry" key={index}>
@@ -234,23 +274,32 @@ const DashboardPage = () => {
               </li>
             ))}
             </ul>
-            </details>
-
+     
             </div>
 
 
-            <div className="weight-log-column">
-            <details>
-            <summary className="weight-summary">Log your weight</summary>
+            <div className="weight-logger">
+
+            <h4 className="log-your-weight">Log your weight</h4>
+           
             <input type="number"
                       value={weightInput}
                       onChange={(e) => setWeightInput(e.target.value)}
                       placeholder="Enter your weight (kg)"
                       className="input-field"
-                />
+            />
+
+            <input
+                  type="date"
+                  value={dateInput}
+                  onChange={(e) => setDateInput(e.target.value)}
+                  className="input-field"
+            />
 
             <Buttoncomponent onClick={handleLogWeight}>Log Weight</Buttoncomponent>
-            </details>
+            {weightError && <p className="weight-error-message">{weightError}</p>}
+
+          
             </div>
           </div>
 
