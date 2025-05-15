@@ -1,43 +1,61 @@
-.landingPage {
-    border-style: solid;
-    margin: 2.5% 0.05%;
-    padding: 50px 1%;
-    display: grid;
-    grid-template-columns: 55% 45%;
-    column-gap: 10px;
-    background: rgb(129,240,195);
-    background: linear-gradient(90deg, rgba(129,240,195,1) 15%, rgba(98,163,208,1) 55%);
+#headline{
+    margin-top: 7rem;
+    margin-bottom: 3rem;
+    font-size: 4rem;
 }
+
+.landing-header{
+    height: 30rem;
+    text-align: center;
+    min-width: 30%;
+    
+}
+
+.tagline{
+
+    font-size: 1.5rem;
+}
+
+
+.landing-background {
+    background: linear-gradient(270deg,#b0fcc6,#c5fcd5,#9dbffe,#8cb3fe);
+    background-size: 180% 180%;
+    animation: gradient-animation 27s ease infinite;
+    height: 1000vh;
+  }
+  
+  @keyframes gradient-animation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .landing-button {
+    width: 100%;             
+    max-width: 30rem;           
+    font-size: 600;      
+  }
+  
+  .landing-button-sect {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;             
+    margin-top: 2rem;
+  }
 
 #landingText {
     margin: 25px;
     align-items: center;
     display: grid;
     padding: 10px;
-}
 
-#landingButtons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    text-align: center;
-}
-
-#landingButtons > button {
-    width: 85%;
-    height: 15%;
-    border-radius: 25px;
-    font-size: 15px;
-    background: black;
-    color: white;
-    font-weight: 700;
-    
-}
-
-#landingButtons > p {
-    margin: 20px 0;
 }
 
 

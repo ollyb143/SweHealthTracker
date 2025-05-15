@@ -6,6 +6,7 @@ import Navbar from "../../components/NavBar";
 import Card from "../../components/Card";
 import GradientContainer from "../../components/Gradient";
 import Buttoncomponent from "../../components/Buttoncomponent"
+import BMIWidget from "../../components/BMIScale"
 import { logoutUser } from "../../../store/userSlice";
 import "../../dashboard.css";
 import {
@@ -29,6 +30,10 @@ const DashboardPage = () => {
   const [weightHistory, setWeightHistory] = useState([]);
   const [dateInput, setDateInput] = useState(""); 
   const [weightError, setWeightError] = useState('');
+  const [bmiRefreshKey, setBmiRefreshKey] = useState(0);
+  const [viewMode, setViewMode] = useState('daily');
+
+ 
 
 
   useEffect(() => {
@@ -134,6 +139,9 @@ const DashboardPage = () => {
         setDateInput('');
         setWeightError('');
         fetchWeightHistory(); 
+        setBmiRefreshKey(prev => prev + 1);
+
+
 
         console.log('Weight log added successfully');
       } else {
@@ -165,8 +173,6 @@ const DashboardPage = () => {
       console.error('Failed to delete weight log');
     }
   };
-
-    
  
   useEffect(() => {
     if (token) fetchWeightHistory();
@@ -179,7 +185,7 @@ const DashboardPage = () => {
     date: new Date(log.date).toLocaleDateString(), 
     weight: log.weight
   }));
-  
+
   
 
  
@@ -234,6 +240,16 @@ const DashboardPage = () => {
 
           <GradientContainer className="weight-title"><h1>Weight Log</h1></GradientContainer>
 
+          <div className="view-mode-selector">
+            <label>View by: </label>
+            <select value={viewMode} onChange={(e) => setViewMode(e.target.value)}>
+              <option value="daily">Day</option>
+              <option value="monthly">Month</option>
+              <option value="yearly">Year</option>
+            </select>
+          </div>
+
+
           {formattedWeightData.length > 0 && (
           <div>
             <ResponsiveContainer width="100%" height={300}>
@@ -247,65 +263,47 @@ const DashboardPage = () => {
             </ResponsiveContainer>
           </div>
           )}
-
-
-
-        
-
-        
         
 
           <div className="weight-information">
-
-            
-
             <div className="weight-logs">
             <h4>Your weight logs</h4>
               
-          
-            
-
             <ul className="weight-ul">
             {weightHistory.map((log, index) => (
               <li className="weight-entry" key={index}>
-                
                 {new Date(log.date).toLocaleDateString()} — {log.weight} kg
                 <button className="weight-delete"onClick={() => handleDeleteWeight(log.weightID)}>✖</button>
               </li>
             ))}
             </ul>
-     
             </div>
 
-
             <div className="weight-logger">
-
             <h4 className="log-your-weight">Log your weight</h4>
-           
-            <input type="number"
-                      value={weightInput}
-                      onChange={(e) => setWeightInput(e.target.value)}
-                      placeholder="Enter your weight (kg)"
-                      className="input-field"
-            />
-
-            <input
-                  type="date"
-                  value={dateInput}
-                  onChange={(e) => setDateInput(e.target.value)}
-                  className="input-field"
-            />
-
+              <input type="number"
+                        value={weightInput}
+                        onChange={(e) => setWeightInput(e.target.value)}
+                        placeholder="Enter your weight (kg)"
+                        className="input-field"
+              />
+              <input
+                    type="date"
+                    value={dateInput}
+                    onChange={(e) => setDateInput(e.target.value)}
+                    className="input-field"
+              />
             <Buttoncomponent onClick={handleLogWeight}>Log Weight</Buttoncomponent>
             {weightError && <p className="weight-error-message">{weightError}</p>}
-
-          
             </div>
           </div>
 
-
           </Card>
         </div>
+
+        <Card className="BMI-card">
+        <BMIWidget  refreshKey={bmiRefreshKey}/>
+        </Card>
 
 
       </main>

@@ -3,7 +3,7 @@ import '../gradient.css';
 
 const GradientContainer = ({ children, className = ""}) => {
   return (
-    <div className={`gradient-container ${className}`}>
+    <div className={`gradient-container  ${className}`}>
       {children}
     </div>
   );
