@@ -39,10 +39,10 @@ export const logWeight = async (req, res) => {
     });
 
   
-    const isToday =
-      logDate.getFullYear() === currentDate.getFullYear() &&
-      logDate.getMonth() === currentDate.getMonth() &&
-      logDate.getDate() === currentDate.getDate();
+    const normalizeDate = (d) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+
+    const isToday = normalizeDate(logDate).getTime() === normalizeDate(currentDate).getTime();
+
 
     if (isToday) {
       await db('users').where({ userID }).update({ weight: parsedWeight });
