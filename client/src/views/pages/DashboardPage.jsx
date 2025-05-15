@@ -31,6 +31,7 @@ const DashboardPage = () => {
   const [dateInput, setDateInput] = useState(""); 
   const [weightError, setWeightError] = useState('');
   const [bmiRefreshKey, setBmiRefreshKey] = useState(0);
+  const [viewMode, setViewMode] = useState('daily');
 
  
 
@@ -172,8 +173,6 @@ const DashboardPage = () => {
       console.error('Failed to delete weight log');
     }
   };
-
-    
  
   useEffect(() => {
     if (token) fetchWeightHistory();
@@ -186,7 +185,7 @@ const DashboardPage = () => {
     date: new Date(log.date).toLocaleDateString(), 
     weight: log.weight
   }));
-  
+
   
 
  
@@ -241,6 +240,16 @@ const DashboardPage = () => {
 
           <GradientContainer className="weight-title"><h1>Weight Log</h1></GradientContainer>
 
+          <div className="view-mode-selector">
+            <label>View by: </label>
+            <select value={viewMode} onChange={(e) => setViewMode(e.target.value)}>
+              <option value="daily">Day</option>
+              <option value="monthly">Month</option>
+              <option value="yearly">Year</option>
+            </select>
+          </div>
+
+
           {formattedWeightData.length > 0 && (
           <div>
             <ResponsiveContainer width="100%" height={300}>
@@ -292,7 +301,7 @@ const DashboardPage = () => {
           </Card>
         </div>
 
-        <Card>
+        <Card className="BMI-card">
         <BMIWidget  refreshKey={bmiRefreshKey}/>
         </Card>
 

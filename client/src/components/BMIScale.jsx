@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import '../bmiscale.css';
+import GradientContainer from "./Gradient";
 
 const BmiWidget = ({refreshKey}) => {
   const token = useSelector(state => state.user.token);
   const [bmi, setBmi] = useState(null);
   const [height, setHeight] = useState(null);
   const [suggestion, setSuggestion] = useState("");
+  const [bmiCategory, setBmiCategory] = useState("");
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -30,10 +33,13 @@ const BmiWidget = ({refreshKey}) => {
 
         if (userBmi < 18.5) {
           setSuggestion(`Your BMI is in the underweight category, aim for at least ${minHealthy.toFixed(1)} kg.`);
+          setBmiCategory("underweight");
         } else if (userBmi > 24.9) {
           setSuggestion(`Your BMI is in the overweight category, aim for no more than ${maxHealthy.toFixed(1)} kg.`);
+          setBmiCategory("overweight");
         } else {
-          setSuggestion("You BMI is in the healthy weight category. Keep it up!");
+          setSuggestion("Your BMI is in the healthy weight category. Keep it up!");
+          setBmiCategory("healthy");
         }
 
       } catch (err) {
@@ -47,11 +53,21 @@ const BmiWidget = ({refreshKey}) => {
   if (bmi === null || height === null) return <p>Loading BMI...</p>;
 
   return (
-    <div className="bmi-widget">
-      <h3>Your BMI</h3>
-      <p>{bmi.toFixed(1)}</p>
-      <p>{suggestion}</p>
-    </div>
+    <div>
+    <GradientContainer>
+    
+      <h1>Your BMI</h1>
+
+    </GradientContainer>
+      <div className="bmi-widget">
+      
+      <div className={`bmi-value ${bmiCategory}`}>{bmi.toFixed(1)}</div>
+      </div>
+      <p className="bmi-suggestion">{suggestion}</p>
+      </div>
+      
+   
+ 
   );
 };
 
