@@ -31,8 +31,6 @@ const DashboardPage = () => {
   const [dateInput, setDateInput] = useState(""); 
   const [weightError, setWeightError] = useState('');
   const [bmiRefreshKey, setBmiRefreshKey] = useState(0);
-  const [viewMode, setViewMode] = useState('daily');
-
  
 
 
@@ -104,7 +102,7 @@ const DashboardPage = () => {
     const currentDate = new Date();
     const parsedWeight = parseFloat(weightInput);
 
-
+    
     if (!weightInput) {
       setWeightError("Weight is required.");
       return;
@@ -186,6 +184,9 @@ const DashboardPage = () => {
     weight: log.weight
   }));
 
+
+  
+
   
 
  
@@ -240,15 +241,7 @@ const DashboardPage = () => {
 
           <GradientContainer className="weight-title"><h1>Weight Log</h1></GradientContainer>
 
-          <div className="view-mode-selector">
-            <label>View by: </label>
-            <select value={viewMode} onChange={(e) => setViewMode(e.target.value)}>
-              <option value="daily">Day</option>
-              <option value="monthly">Month</option>
-              <option value="yearly">Year</option>
-            </select>
-          </div>
-
+          
 
           {formattedWeightData.length > 0 && (
           <div>

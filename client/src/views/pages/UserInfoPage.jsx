@@ -13,6 +13,7 @@ const UserInfoPage = () => {
   const [profile, setProfile] = useState(null);
   const [activeTab, setActiveTab] = useState("profile");
   const [isEditing, setIsEditing] = useState(false);
+  const [profileError, setprofileError] = useState('');
   const [editableProfile, setEditableProfile] = useState({
     realname: "",
     gender: "",
@@ -76,15 +77,51 @@ const UserInfoPage = () => {
   const toggleEdit = () => {
     setIsEditing((prev) => !prev);
   };
-
+ 
 
   const saveProfile = async () => {
-    if (!editableProfile) {
-      console.error("[Frontend] No profile data available to save.");
+    setprofileError('');
+
+    const { weight, goalWeight, height, email } = editableProfile;
+
+
+    const parsedWeight = parseFloat(weight);
+    const parsedGoalWeight = parseFloat(goalWeight);
+    const parsedHeight = parseFloat(height);
+
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setprofileError("Email format is invalid.");
       return;
     }
   
-    console.log("[Frontend] Attempting to send profile data:", editableProfile);
+    if (isNaN(parsedWeight)) {
+      setprofileError("Weight must be a valid number.");
+      return;
+    }
+    if (parsedWeight < 20 || parsedWeight > 635) {
+      setprofileError("Weight must be between 20kg and 635kg.");
+      return;
+    }
+  
+    if (isNaN(parsedGoalWeight)) {
+      setprofileError("Goal weight must be a valid number.");
+      return;
+    }
+    if (parsedGoalWeight < 20 || parsedGoalWeight > 635) {
+      setprofileError("Goal weight must be between 20kg and 635kg.");
+      return;
+    }
+  
+    if (parsedHeight > 300) {
+      setprofileError("Height shouldn't exceed 300cm.");
+      return;
+    }
+
+
+
+ 
   
     try {
       const res = await fetch("http://localhost:3000/api/profile", {
@@ -96,13 +133,11 @@ const UserInfoPage = () => {
         body: JSON.stringify(editableProfile),
       });
   
-      console.log("[Frontend] Server response status:", res.status);
-  
       const contentType = res.headers.get("Content-Type");
       if (!res.ok) {
-        console.warn("[Frontend] Server responded with error status:", res.status);
+        console.warn("[Frontend] failed to update profile:", res.status);
         const errorText = await res.text(); 
-        console.warn("[Frontend] Raw server error response:", errorText);
+        console.warn("[Frontend] server error response:", errorText);
         return;
       }
   
@@ -115,7 +150,7 @@ const UserInfoPage = () => {
         console.warn("[Frontend] Server returned non-JSON response");
       }
     } catch (err) {
-      console.error("[Frontend] Network or parsing error:", err);
+      console.error("[Frontend] Network or unexpected error:", err);
     }
   };
   
@@ -297,6 +332,8 @@ const UserInfoPage = () => {
           <Buttoncomponent className="edit-button" onClick={isEditing ? saveProfile : toggleEdit}>
             {isEditing ? "Save" : "Edit"}
           </Buttoncomponent>
+
+          {profileError && <p className="weight-error-message">{profileError}</p>}
         </div>
       </Card>
       <Footer />
