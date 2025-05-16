@@ -16,7 +16,7 @@ const BmiWidget = ({refreshKey}) => {
         const res = await fetch("http://localhost:3000/api/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
-    
+     
 
         if (!res.ok) return;
 

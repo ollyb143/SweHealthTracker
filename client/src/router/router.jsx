@@ -8,6 +8,8 @@ import LoginPage from "../views/pages/LoginPage";
 import RegisterPage from "../views/pages/RegisterPage";
 import DashboardPage from "../views/pages/DashboardPage";
 import UserInfoPage from "../views/pages/UserInfoPage";
+import ForgotPasswordPage from "../views/pages/ForgotPasswordPage";
+import ResetPasswordPage from "../views/pages/ResetPasswordPage";
 
 
 export const router = createBrowserRouter([
@@ -47,5 +49,10 @@ export const router = createBrowserRouter([
 {
     path: "/aboutyou",
     element: <UserInfoPage />,
-}
+},
+{
+    path: "/forgotpassword",
+    element: <ForgotPasswordPage />,
+},
+
 ]);
