@@ -18,7 +18,7 @@ const LoginPage = () => {
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
     setError(""); // Clear error when user starts typing
-  };
+  }; 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -65,7 +65,7 @@ const LoginPage = () => {
   
           <p id="signUpText">
             If you do not have an account already, you can sign up{" "}
-            <a href="/register">here.</a>
+            <a href="/register" className="login-link">here.</a>
           </p>
           
 
@@ -96,15 +96,16 @@ const LoginPage = () => {
             />
             </div>
 
-            <Buttoncomponent variant="primary" className="edit-button" type="submit">
+            <Buttoncomponent  className="edit-button" type="submit">
               Sign in
             </Buttoncomponent>
 
 
-            <Buttoncomponent  variant="secondary" className="landing-button" onClick={() => window.location.href = '/forgotpassword'}>forgot your password?</Buttoncomponent>
+            <div ><a href="/forgotpassword" className="login-link">Forgot your password?</a></div>
+
 
             
-            {error && <p className="loginError">{error}</p>}
+            {error && <p className="profile-row">{error}</p>}
           </form>
         </section>
         </Card>

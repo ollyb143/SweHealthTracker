@@ -1,4 +1,10 @@
 import { useState } from "react";
+import Footer from "../../components/Footer";
+import Banner from "../../components/Banner";
+import Card from "../../components/Card";
+import GradientContainer from "../../components/Gradient";
+import Buttoncomponent from "../../components/Buttoncomponent"
+import "../../forgotpassword.css";
 
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState("");
@@ -80,8 +86,7 @@ const ForgotPasswordPage = () => {
       const data = await res.json();
 
       if (res.ok) {
-        setMessage("Password reset successfully!");
-        setStep(1);
+        setStep(4);
         setEmail("");
         setCode("");
         setNewPassword("");
@@ -95,18 +100,22 @@ const ForgotPasswordPage = () => {
 
   return (
     <div>
-      <h2>Forgot Password</h2>
+      <Banner/>
+      <Card className="forgot-card">
+      <GradientContainer className="forgot-title"><h1>Reset your password</h1></GradientContainer>
+
 
       {step === 1 &&(
         <form onSubmit={handleSubmit}>
             <input
+            className="input-field"
             type="email"
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
             />
-            <button type="submit">Send Reset Link</button>
+            <Buttoncomponent type="submit">Send code</Buttoncomponent>
         </form> )}
 
 
@@ -114,13 +123,14 @@ const ForgotPasswordPage = () => {
         {step === 2 &&(
         <form onSubmit={handleVerifyCode}>
           <input
+          className="input-field"
             type="text"
             placeholder="Enter your verification code"
             value={code}
             onChange={(e) => setCode(e.target.value)}
             required
           />
-          <button type="submit">submit</button>
+          <Buttoncomponent type="submit">Submit</Buttoncomponent>
         </form>
       )}
 
@@ -128,25 +138,43 @@ const ForgotPasswordPage = () => {
         {step === 3 && (
         <form onSubmit={handleResetPassword}>
           <input
+          className="input-field"
             type="password"
             placeholder="Enter your new password"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             required
           />
-          <button type="submit">confirm</button>
+          <Buttoncomponent className="forgot-button" type="submit">Confirm</Buttoncomponent>
         </form>)}
+
+
+        {step === 4 && (
+          <div>
+          <h3>Password successfully reset!</h3>
+          <div>
+            <a href="/login">Return to login</a>
+          </div>
+          </div>
+        )}
+
+
+       
 
         
 
 
-        {message && <p style={{ color: "green" }}>{message}</p>}
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {message && <p >{message}</p>}
+        {error && <p>{error}</p>}
+
+        </Card>
+
+
 
     
 
 
-
+    <Footer/>
     </div>
   );
 };

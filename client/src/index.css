@@ -16,9 +16,17 @@
   box-sizing: border-box;
   transition: border-color 0.2s ease;
   text-align: center;
+  margin-bottom: 0.3rem;
 }
 
 input:focus{
   outline: none;
   border-color: #82dce2;
 }
+
+a {
+  color: #5bd0d6;
+  font-weight: 600;
+  text-decoration: none;
+}
+

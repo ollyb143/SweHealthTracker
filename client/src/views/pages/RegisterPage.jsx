@@ -31,7 +31,7 @@ const RegisterPage = () => {
     e.preventDefault();
     setError("");
 
-    if (
+    if ( 
       !form.realname ||
       !form.username ||
       !form.email ||
@@ -39,7 +39,7 @@ const RegisterPage = () => {
       !form.dob ||
       !form.gender ||
       !form.height ||
-      !form.weight
+      !form.weight  
     ) {
       setError("All fields except 'Goal Weight' are required.");
       return;
@@ -70,7 +70,7 @@ const RegisterPage = () => {
     } catch (err) {
       setError(err.message);
     }
-  };
+  }; 
 
   return (
     <div>
@@ -197,7 +197,7 @@ const RegisterPage = () => {
               </div>
             </div>
 
-            {error && <p className="error">{error}</p>}
+            {error && <p className="profile-row">{error}</p>}
 
             <button type="submit" className="continue-button">
               Continue

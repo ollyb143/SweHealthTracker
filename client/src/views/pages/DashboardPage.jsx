@@ -30,6 +30,7 @@ const DashboardPage = () => {
   const [weightHistory, setWeightHistory] = useState([]);
   const [dateInput, setDateInput] = useState(""); 
   const [weightError, setWeightError] = useState('');
+  const [message, setMessage] = useState("");
   const [bmiRefresh, setBmiRefresh] = useState(0);
   const [chartView, setchartView] = useState("all"); 
 
@@ -104,6 +105,8 @@ const DashboardPage = () => {
     const currentDate = new Date();
     const parsedWeight = parseFloat(weightInput);
 
+    setMessage('')
+
     
     if (!weightInput) {
       setWeightError("Weight is required.");
@@ -141,6 +144,8 @@ const DashboardPage = () => {
         fetchWeightHistory(); 
         setBmiRefresh(prev => prev + 1);
 
+        setMessage('Weight log added!');
+
 
 
         console.log('Weight log added successfully');
@@ -164,8 +169,12 @@ const DashboardPage = () => {
       if (!response.ok) {
         throw new Error('Failed to delete weight log');
       }
+
+      
   
       setWeightHistory((prevLogs) => prevLogs.filter((log) => log.weightID !== weightID));
+      
+
   
       console.log('Weight log deleted successfully');
     } catch (error) {
@@ -331,7 +340,10 @@ const DashboardPage = () => {
                     className="input-field"
               />
             <Buttoncomponent onClick={handleLogWeight}>Log Weight</Buttoncomponent>
-            {weightError && <p className="weight-error-message">{weightError}</p>}
+            <div>
+            {weightError && <p className="profile-row">{weightError}</p>}
+            {message && <p className="profile-row">{message}</p>}
+            </div>
             </div>
           </div>
 
