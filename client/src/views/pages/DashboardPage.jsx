@@ -30,8 +30,8 @@ const DashboardPage = () => {
   const [weightHistory, setWeightHistory] = useState([]);
   const [dateInput, setDateInput] = useState(""); 
   const [weightError, setWeightError] = useState('');
-  const [bmiRefreshKey, setBmiRefreshKey] = useState(0);
-  const [viewMode, setViewMode] = useState('daily');
+  const [bmiRefresh, setBmiRefresh] = useState(0);
+  const [chartView, setchartView] = useState("all"); 
 
  
 
@@ -104,7 +104,7 @@ const DashboardPage = () => {
     const currentDate = new Date();
     const parsedWeight = parseFloat(weightInput);
 
-
+    
     if (!weightInput) {
       setWeightError("Weight is required.");
       return;
@@ -139,7 +139,7 @@ const DashboardPage = () => {
         setDateInput('');
         setWeightError('');
         fetchWeightHistory(); 
-        setBmiRefreshKey(prev => prev + 1);
+        setBmiRefresh(prev => prev + 1);
 
 
 
@@ -179,12 +179,38 @@ const DashboardPage = () => {
   }, [token]);
 
 
-  const formattedWeightData = [...weightHistory].sort((a, b)=> new Date(a.date)-new Date(b.date)).map
-  (log => ({
+  const now = new Date();
 
-    date: new Date(log.date).toLocaleDateString(), 
-    weight: log.weight
-  }));
+  const filteredWeightData = weightHistory.filter((log) => {
+    const logDate = new Date(log.date);
+    if (chartView === "30days") {
+      const thirtyDaysAgo = new Date(now);
+      thirtyDaysAgo.setDate(now.getDate() - 30);
+      return logDate >= thirtyDaysAgo;
+    }
+  
+    if (chartView === "1year") {
+      const oneYearAgo = new Date(now);
+      oneYearAgo.setFullYear(now.getFullYear() - 1);
+      return logDate >= oneYearAgo;
+    }
+    return true; 
+  });
+
+  const formattedWeightData = [...filteredWeightData]
+    .sort((a, b) => new Date(a.date) - new Date(b.date))
+    .map((log) => ({
+      date: new Date(log.date).toLocaleDateString(),
+      weight: log.weight,
+    }));
+
+
+  
+
+
+
+  
+
 
   
 
@@ -240,15 +266,16 @@ const DashboardPage = () => {
 
           <GradientContainer className="weight-title"><h1>Weight Log</h1></GradientContainer>
 
-          <div className="view-mode-selector">
-            <label>View by: </label>
-            <select value={viewMode} onChange={(e) => setViewMode(e.target.value)}>
-              <option value="daily">Day</option>
-              <option value="monthly">Month</option>
-              <option value="yearly">Year</option>
+          <div className="chart-view-selector">
+            <label>View: </label>
+            <select value={chartView} onChange={(e) => setchartView(e.target.value)}>
+              <option value="all">All Logs</option>
+              <option value="30days">Past 30 days</option>
+              <option value="1year">Past Year</option>
             </select>
           </div>
 
+          
 
           {formattedWeightData.length > 0 && (
           <div>
@@ -263,6 +290,8 @@ const DashboardPage = () => {
             </ResponsiveContainer>
           </div>
           )}
+
+         
         
 
           <div className="weight-information">
@@ -302,7 +331,7 @@ const DashboardPage = () => {
         </div>
 
         <Card className="BMI-card">
-        <BMIWidget  refreshKey={bmiRefreshKey}/>
+        <BMIWidget  refreshKey={bmiRefresh}/>
         </Card>
 
 
