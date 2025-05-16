@@ -16,7 +16,7 @@ const ExercisePage = () => {
   });
 
   const handleSubmit = async () => {
-    const res = await fetch('http://localhost:3000/api/exercise', {
+    const res = await fetch('http://localhost:3000/api/exercise/logExercise', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

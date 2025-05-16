@@ -21,7 +21,7 @@
     background: linear-gradient(270deg,#b0fcc6,#c5fcd5,#9dbffe,#8cb3fe);
     background-size: 180% 180%;
     animation: gradient-animation 27s ease infinite;
-    height: 1000vh;
+    height: 100vh;
   }
   
   @keyframes gradient-animation {
@@ -39,7 +39,7 @@
   .landing-button {
     width: 100%;             
     max-width: 30rem;           
-    font-size: 600;      
+    font-size: 100%;      
   }
   
   .landing-button-sect {

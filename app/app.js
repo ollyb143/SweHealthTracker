@@ -6,6 +6,8 @@ import authRoutes from './routes/authRoutes.js';
 import exerciseRoutes from './routes/exerciseRoutes.js';
 import profileRoutes from './routes/profileRoutes.js';
 import dashboardRoutes from './routes/dashboardRoutes.js';
+import groupRoutes from './routes/groupRoutes.js';
+import goalRoutes from './routes/goalRoutes.js';
 
 dotenv.config();
 
@@ -26,6 +28,9 @@ app.use('/api/auth', authRoutes);
 app.use('/api/exercise', exerciseRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/group', groupRoutes);
+app.use('/api/goal', goalRoutes);
+
 
 
 app.get('/favicon.ico', (req, res) => res.status(204)); // 204 means "No Content"

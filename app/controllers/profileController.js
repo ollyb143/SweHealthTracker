@@ -30,12 +30,43 @@ export const updateProfile = async (req, res) => {
   try {
     const { userID } = req.user;
     const { realname, gender, height, weight, goalWeight, username, email } = req.body;
-    
+     
 
     
     if (!realname || !gender || !height || !weight || !goalWeight || !username || !email) {
       return res.status(400).json({ error: "All fields must be provided" });
     }
+
+
+    const parsedWeight = parseFloat(weight);
+    const parsedGoalWeight = parseFloat(goalWeight);
+    const parsedHeight = parseFloat(height);
+    if (isNaN(parsedWeight)) {
+      return res.status(400).json({ message: "Weight must be a valid number" });
+    }
+
+    
+    if (parsedWeight < 20 || parsedWeight > 635) {
+      return res.status(400).json({ message: "Weight must be between 20kg and 635kg" });
+    }
+
+    if (isNaN(parsedGoalWeight)) {
+      return res.status(400).json({ message: "Goal weight must be a valid number" });
+    }
+
+    
+    if (parsedGoalWeight < 20 || parsedGoalWeight > 635) {
+      return res.status(400).json({ message: "Goal weight must be between 20kg and 635kg" });
+    }
+
+    if (parsedHeight > 300) {
+      return res.status(400).json({ message: "Height shouldn't exceed 300cm" });
+    }
+
+
+
+
+
 
     const BMI = calculateBMI(weight, height);
 
