@@ -11,9 +11,9 @@ dotenv.config();
 const development = {
   client: 'postgresql',
   connection: {
-    database: "swehealthtrack",
+    database: "swehealthtracker",
     user: "postgres",
-    password: "Password"
+    password: "letmein"
   },
   pool: {
     min: 2,
