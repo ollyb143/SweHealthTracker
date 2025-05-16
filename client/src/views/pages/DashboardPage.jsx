@@ -20,7 +20,7 @@ import {
 } from 'recharts';
 
 
-
+ 
 const DashboardPage = () => {
   const [exercises, setExercises] = useState([]);
   const { token } = useSelector((state) => state.user);
@@ -291,12 +291,20 @@ const DashboardPage = () => {
           </div>
           )}
 
+          {formattedWeightData.length == 0 && (
+            <div><p>No weight logs yet!</p></div>
+          )}
+
          
         
 
           <div className="weight-information">
             <div className="weight-logs">
             <h4>Your weight logs</h4>
+
+            {formattedWeightData.length == 0 && (
+            <div><p>No weight logs yet!</p></div>
+          )}
               
             <ul className="weight-ul">
             {weightHistory.map((log, index) => (

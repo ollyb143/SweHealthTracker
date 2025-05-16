@@ -100,7 +100,10 @@ const LoginPage = () => {
               Sign in
             </Buttoncomponent>
 
-            {/* Error message */}
+
+            <Buttoncomponent  variant="secondary" className="landing-button" onClick={() => window.location.href = '/forgotpassword'}>forgot your password?</Buttoncomponent>
+
+            
             {error && <p className="loginError">{error}</p>}
           </form>
         </section>

@@ -6,6 +6,7 @@ import Card from "../../components/Card";
 import GradientContainer from "../../components/Gradient";
 
 
+
 const RegisterPage = () => {
   const [form, setForm] = useState({
     realname: "",
