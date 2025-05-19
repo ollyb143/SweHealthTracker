@@ -5,7 +5,6 @@ import Banner from "../../components/Banner";
 import Card from "../../components/Card";
 import GradientContainer from "../../components/Gradient";
 
-
 const RegisterPage = () => {
   const [form, setForm] = useState({
     realname: "",
@@ -78,8 +77,9 @@ const RegisterPage = () => {
         <section>
           <GradientContainer className="register-title">
             <h1>Register</h1>
-            <p>Welcome to HealthTracker! Please enter your information below.</p>
           </GradientContainer>
+
+          <p>Welcome to HealthTracker! Please enter your information below.</p>
 
           <form onSubmit={handleSubmit}>
             <div className="register-box">

@@ -21,4 +21,4 @@ const Buttoncomponent = ({
   };
   
 
-export default Buttoncomponent; 
+export default Buttoncomponent;

@@ -1,80 +1,69 @@
 .register-main {
-    max-width: 60%;
-    margin-bottom: 7rem;
-  }
-  
-  .register-title {
- 
-    margin-bottom: 1rem;
-    text-align: center;
-  }
-  
-  .register-box {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-  
-  .register-row {
-    flex: 1 1 45%;
-    display: flex;
-    flex-direction: column;
-  }
-
-
-.register-row input:focus{
-  outline: none;
-  border-color: #82dce2;
- 
+  max-width: 60%;
+  margin-bottom: 7rem;
 }
 
-.register-row select:focus{
-  outline: none;
-  border-color: #82dce2;
- 
+.register-title {
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
-  
-  .register-row label {
-    margin: 0.4rem 0.2rem;
-    
-  }
-  
- 
+.register-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
 
-  
-   .error {
-    color: red;
-    margin-top: 1rem;
-    font-weight: bold;
-  }
-  
-  .continue-button {
-    display: block;
-    margin: 2rem auto 0;
-    padding: 0.75rem 2rem;
-    font-size: 1rem;
+.register-row {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.register-row input:focus {
+  outline: none;
+  border-color: #82dce2;
+}
+
+.register-row select:focus {
+  outline: none;
+  border-color: #82dce2;
+}
+
+
+.register-row label {
+  margin: 0.4rem 0.2rem;
+}
+
+.error {
+  color: red;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.continue-button {
+  padding: 12px;
+    border-radius: 16px;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 0.5rem;
+    background: linear-gradient(90deg, #cbfdda, #96bbff);
+    color: #000;
+    font-weight: 600;
+    border: 1px solid #7291b9; 
     cursor: pointer;
-    transition: background 0.2s ease;
-    border: 1px solid #ccc;
-    border-radius: 25px;
-    background: white;
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-  }
-  
-  .continue-button:hover {
-    background-color: #82dce2;
-    border-color: #82dce2;
-    color: white;
-  }
-  
-  @media (max-width: 600px) {
-    .register-row {
-      flex: 1 1 100%;
-    }
-  }
-  
+    transition: transform 0.2s ease;
+}
 
-  
-   
-    
+.continue-button:hover {
+  background-color: #82dce2;
+  border-color: #82dce2;
+  color: white;
+}
+
+@media (max-width: 600px) {
+  .register-row {
+    flex: 1 1 100%;
+  }
+}

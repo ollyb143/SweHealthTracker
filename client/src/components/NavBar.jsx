@@ -9,10 +9,19 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    dispatch(logoutUser());        // clear Redux state
-    localStorage.removeItem("appUser"); // clear localStorage
-    navigate("/");                 // redirect to landing
+  const handleLogout = async () => {
+    // 1) Tell the server to clear the session cookie
+    await fetch("http://localhost:3000/api/auth/logout", {
+      method: "POST",
+      credentials: "include",
+    });
+
+    // 2) Clear Redux / localStorage
+    dispatch(logoutUser());
+    localStorage.removeItem("appUser");
+
+    // 3) Redirect to login (or "/" if you prefer)
+    navigate("/login");
   };
 
   return (
@@ -28,11 +37,18 @@ const NavBar = () => {
           <li><Link to="/goals">Goals</Link></li>
           <li><Link to="/groups">Groups</Link></li>
           <li><Link to="/aboutyou">Profile</Link></li>
-          <li><button className="logout-button" onClick={handleLogout}>Logout</button></li>
+          <li>
+            <button className="logout-button" onClick={handleLogout}>
+              Logout
+            </button>
+          </li>
         </ul>
 
         {/* Mobile Menu Toggle */}
-        <button className="nav-menu-button" onClick={() => setIsOpen(!isOpen)}>
+        <button
+          className="nav-menu-button"
+          onClick={() => setIsOpen(!isOpen)}
+        >
           ☰
         </button>
       </div>
@@ -46,7 +62,11 @@ const NavBar = () => {
           <li><Link to="/goals">Goals</Link></li>
           <li><Link to="/groups">Groups</Link></li>
           <li><Link to="/aboutyou">Profile</Link></li>
-          <li><button className="logout-button" onClick={handleLogout}>Logout</button></li>
+          <li>
+            <button className="logout-button" onClick={handleLogout}>
+              Logout
+            </button>
+          </li>
         </ul>
       )}
     </nav>

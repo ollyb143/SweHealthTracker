@@ -1,162 +1,135 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Navbar from "../../components/NavBar";
+import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
 import Card from "../../components/Card";
 import GradientContainer from "../../components/Gradient";
 import Buttoncomponent from "../../components/Buttoncomponent";
 import "../../userinfo.css";
 
+const API_BASE = "http://localhost:3000/api/profile";
 
-const UserInfoPage = () => {
-  const token = useSelector(state => state.user.token);
-  const [profile, setProfile] = useState(null);
-  const [activeTab, setActiveTab] = useState("profile");
-  const [isEditing, setIsEditing] = useState(false);
-  const [editableProfile, setEditableProfile] = useState({
-    realname: "",
-    gender: "",
-    height: "",
-    weight: "",
-    goalWeight: "",
-    username: "",
-    email: "",
-  });
+export default function UserInfoPage() {
+  const navigate = useNavigate();
+  const token    = useSelector((s) => s.user.token);
+
+  const [profile, setProfile]           = useState(null);
+  const [editable, setEditable]         = useState({});
+  const [isEditing, setIsEditing]       = useState(false);
+  const [activeTab, setActiveTab]       = useState("account");
+  const [error, setError]               = useState("");
 
   useEffect(() => {
-    const fetchProfile = async () => {
+    (async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/profile", {
-          headers: { Authorization: `Bearer ${token}` },
+        const chk = await fetch("http://localhost:3000/api/auth/check", {
+          credentials: "include",
         });
-  
-        if (!res.ok) return;
-  
+        if (!chk.ok) throw new Error();
+
+        const res = await fetch(API_BASE, {
+          credentials: "include",
+        });
+        if (!res.ok) throw new Error("Failed to fetch profile");
         const data = await res.json();
         setProfile(data);
-  
-        setEditableProfile({
-          realname: data.realname || "",
-          gender: data.gender || "",
-          height: data.height ?? "",
-          weight: data.weight ?? "",
-          goalWeight: data.goalWeight ?? "",
-          username: data.username || "",
-          email: data.email || "",
+        setEditable({
+          realname:  data.realname,
+          gender:    data.gender,
+          height:    data.height,
+          weight:    data.weight,
+          goalWeight:data.goalWeight,
+          username:  data.username,
+          email:     data.email,
         });
-  
-      } catch (err) {
-        console.error("Error fetching profile:", err);
+      } catch {
+        navigate("/login", { replace: true });
       }
-    };
-  
-    if (token) fetchProfile();
-  }, [token]);
-  
-  
+    })();
+  }, [navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(`[Frontend] Updating field ${name} to:`, value);
-  
-    if (name === 'height' || name === 'weight' || name === 'goalWeight') {
-      setEditableProfile((prev) => ({
-        ...prev,
-        [name]: value ? Number(value) : '',
-      }));
-    } else {
-      setEditableProfile((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
+    setEditable((p) => ({
+      ...p,
+      [name]: name === "height" || name === "weight" || name === "goalWeight"
+        ? Number(value)
+        : value,
+    }));
+    setError("");
   };
-  
-
-  const toggleEdit = () => {
-    setIsEditing((prev) => !prev);
-  };
-
 
   const saveProfile = async () => {
-    if (!editableProfile) {
-      console.error("[Frontend] No profile data available to save.");
-      return;
+    setError("");
+    const { email, height, weight, goalWeight } = editable;
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return setError("Invalid email format.");
     }
-  
-    console.log("[Frontend] Attempting to send profile data:", editableProfile);
-  
+    if (weight < 20 || weight > 635) {
+      return setError("Weight must be 20–635 kg.");
+    }
+    if (goalWeight < 20 || goalWeight > 635) {
+      return setError("Goal weight must be 20–635 kg.");
+    }
+    if (height > 300) {
+      return setError("Height must be ≤ 300 cm.");
+    }
+
     try {
-      const res = await fetch("http://localhost:3000/api/profile", {
+      const res = await fetch(API_BASE, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(editableProfile),
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(editable),
       });
-  
-      console.log("[Frontend] Server response status:", res.status);
-  
-      const contentType = res.headers.get("Content-Type");
       if (!res.ok) {
-        console.warn("[Frontend] Server responded with error status:", res.status);
-        const errorText = await res.text(); 
-        console.warn("[Frontend] Raw server error response:", errorText);
-        return;
+        const text = await res.text();
+        throw new Error(text || "Failed to update profile");
       }
-  
-      if (contentType && contentType.includes("application/json")) {
-        const updatedProfile = await res.json();
-        console.log("[Frontend] Successfully updated profile:", updatedProfile);
-        setProfile(updatedProfile);
-        setIsEditing(false); 
-      } else {
-        console.warn("[Frontend] Server returned non-JSON response");
-      }
-    } catch (err) {
-      console.error("[Frontend] Network or parsing error:", err);
+      const updated = await res.json();
+      setProfile(updated);
+      setIsEditing(false);
+    } catch (e) {
+      setError(e.message);
     }
   };
-  
-  
-  
-  
-  
+
 
   if (!profile) {
     return (
       <div>
-        <Navbar />
+        <NavBar />
         <Card className="you-card">
           <GradientContainer>
             <h1>All About You</h1>
-            <p style={{ textAlign: "center" }}>Loading...</p>
+            <p style={{ textAlign: "center" }}>Loading…</p>
           </GradientContainer>
         </Card>
         <Footer />
       </div>
     );
   }
- 
+
   return (
     <div>
-      <Navbar />
+      <NavBar />
+
       <Card className="you-card">
         <GradientContainer>
           <h1>All About You</h1>
           <div className="tab-button-container">
             <Buttoncomponent
               variant="secondary"
-              className={`tab-button ${activeTab === "account" ? "active" : ""}`}
+              className={activeTab === "account" ? "active" : ""}
               onClick={() => setActiveTab("account")}
             >
               Your Account
             </Buttoncomponent>
-
             <Buttoncomponent
-            variant="secondary"
-              className={`tab-button ${activeTab === "profile" ? "active" : ""}`}
+              variant="secondary"
+              className={activeTab === "profile" ? "active" : ""}
               onClick={() => setActiveTab("profile")}
             >
               Your Profile
@@ -165,110 +138,104 @@ const UserInfoPage = () => {
         </GradientContainer>
 
         <div className="details-container">
-        
           {activeTab === "account" && (
             <div className="details">
               {isEditing ? (
-                <div>
+                <>
                   <div className="profile-row">
-                    <label>Username</label>{" "}
+                    <label>Username</label>
                     <input
-                      className="input-field"
                       name="username"
-                      value={editableProfile.username || ""}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className="profile-row">
-                    <label>Email</label>{" "}
-                    <input
                       className="input-field"
-                      name="email"
-                      value={editableProfile.email || ""}
+                      value={editable.username}
                       onChange={handleChange}
                     />
                   </div>
-                </div>
+                  <div className="profile-row">
+                    <label>Email</label>
+                    <input
+                      name="email"
+                      className="input-field"
+                      value={editable.email}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </>
               ) : (
-                <div>
+                <>
                   <p className="profile-row">
                     <label>Username</label> {profile.username}
                   </p>
                   <p className="profile-row">
                     <label>Email</label> {profile.email}
                   </p>
-                </div>
+                </>
               )}
             </div>
           )}
 
-         
           {activeTab === "profile" && (
             <div className="details">
-              <h2>Profile Information</h2>
               {isEditing ? (
-                <div>
+                <>
                   <div className="profile-row">
-                    <label>Name</label>{" "}
+                    <label>Name</label>
                     <input
-                      className="input-field"
                       name="realname"
-                      value={editableProfile.realname || ""}
+                      className="input-field"
+                      value={editable.realname}
                       onChange={handleChange}
                     />
                   </div>
-
                   <div className="profile-row">
-                    <label>Gender</label>{" "}
+                    <label>Gender</label>
                     <select
-                      className="input-field"
                       name="gender"
-                      value={editableProfile.gender || ""}
+                      className="input-field"
+                      value={editable.gender}
                       onChange={handleChange}
-                      required
                     >
-                      
                       <option value="male">Male</option>
                       <option value="female">Female</option>
                       <option value="other">Other</option>
-                      <option value="prefer-not-to-say">Prefer not to say</option>
+                      <option value="prefer-not-to-say">
+                        Prefer not to say
+                      </option>
                     </select>
-
                   </div>
-
                   <div className="profile-row">
-                    <label>Height</label>{" "}
+                    <label>Height (cm)</label>
                     <input
-                      className="input-field"
                       name="height"
-                      value={editableProfile.height || ""}
+                      className="input-field"
+                      type="number"
+                      value={editable.height}
                       onChange={handleChange}
                     />
                   </div>
-
                   <div className="profile-row">
-                    <label>Weight</label>{" "}
+                    <label>Weight (kg)</label>
                     <input
-                      className="input-field"
                       name="weight"
-                      value={editableProfile.weight || ""}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className="profile-row">
-                    <label>Goal Weight</label>{" "}
-                    <input
                       className="input-field"
-                      name="goalWeight"
-                      value={editableProfile.goalWeight || ""}
+                      type="number"
+                      value={editable.weight}
                       onChange={handleChange}
                     />
                   </div>
-                </div>
+                  <div className="profile-row">
+                    <label>Goal Weight (kg)</label>
+                    <input
+                      name="goalWeight"
+                      className="input-field"
+                      type="number"
+                      value={editable.goalWeight}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </>
               ) : (
-                <div>
+                <>
                   <p className="profile-row">
                     <label>Name</label> {profile.realname}
                   </p>
@@ -287,22 +254,24 @@ const UserInfoPage = () => {
                   <p className="profile-row">
                     <label>Goal Weight</label> {profile.goalWeight} kg
                   </p>
-                </div>
+                </>
               )}
             </div>
           )}
         </div>
 
         <div className="input-row">
-          <Buttoncomponent className="edit-button" onClick={isEditing ? saveProfile : toggleEdit}>
+          <Buttoncomponent
+            className="edit-button"
+            onClick={() => (isEditing ? saveProfile() : setIsEditing(true))}
+          >
             {isEditing ? "Save" : "Edit"}
           </Buttoncomponent>
+          {error && <p className="error">{error}</p>}
         </div>
       </Card>
+
       <Footer />
     </div>
   );
-};
-
-export default UserInfoPage;
- 
+}

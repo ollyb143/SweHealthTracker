@@ -1,28 +1,41 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import '../bmiscale.css';
+import "../bmiscale.css";
 import GradientContainer from "./Gradient";
 
-const BmiWidget = ({refreshKey}) => {
-  const token = useSelector(state => state.user.token);
+const BMIWidget = ({ refreshKey }) => {
   const [bmi, setBmi] = useState(null);
   const [height, setHeight] = useState(null);
   const [suggestion, setSuggestion] = useState("");
   const [bmiCategory, setBmiCategory] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const res = await fetch("http://localhost:3000/api/profile", {
-          headers: { Authorization: `Bearer ${token}` },
+          credentials: "include", // REQUIRED to send cookies
+          headers: {
+            "Content-Type": "application/json",
+          },
         });
-    
 
-        if (!res.ok) return;
+        if (res.status === 401) {
+          setError("Session expired. Please log in again.");
+          return;
+        }
+
+        if (!res.ok) {
+          throw new Error("Failed to load profile data");
+        }
 
         const data = await res.json();
         const userHeight = data.height;
         const userBmi = data.BMI;
+
+        if (!userHeight || !userBmi) {
+          throw new Error("Incomplete profile data");
+        }
 
         setHeight(userHeight);
         setBmi(userBmi);
@@ -32,10 +45,10 @@ const BmiWidget = ({refreshKey}) => {
         const maxHealthy = 24.9 * heightM * heightM;
 
         if (userBmi < 18.5) {
-          setSuggestion(`Your BMI is in the underweight category, aim for at least ${minHealthy.toFixed(1)} kg.`);
+          setSuggestion(`Your BMI is in the underweight category. Aim for at least ${minHealthy.toFixed(1)} kg.`);
           setBmiCategory("underweight");
         } else if (userBmi > 24.9) {
-          setSuggestion(`Your BMI is in the overweight category, aim for no more than ${maxHealthy.toFixed(1)} kg.`);
+          setSuggestion(`Your BMI is in the overweight category. Aim for no more than ${maxHealthy.toFixed(1)} kg.`);
           setBmiCategory("overweight");
         } else {
           setSuggestion("Your BMI is in the healthy weight category. Keep it up!");
@@ -43,32 +56,28 @@ const BmiWidget = ({refreshKey}) => {
         }
 
       } catch (err) {
-        console.error("Error fetching BMI:", err);
+        console.error("BMI fetch error:", err);
+        setError("Failed to fetch BMI data.");
       }
     };
 
-    if (token) fetchProfile();
-  }, [token, refreshKey]);
+    fetchProfile();
+  }, [refreshKey]);
 
-  if (bmi === null || height === null) return <p>Loading BMI...</p>;
+  if (error) return <p className="error">{error}</p>;
+  if (bmi === null || height === null) return <p>Loading BMI…</p>;
 
   return (
     <div>
-    <GradientContainer>
-    
-      <h1>Your BMI</h1>
-
-    </GradientContainer>
+      <GradientContainer>
+        <h1>Your BMI</h1>
+      </GradientContainer>
       <div className="bmi-widget">
-      
-      <div className={`bmi-value ${bmiCategory}`}>{bmi.toFixed(1)}</div>
+        <div className={`bmi-value ${bmiCategory}`}>{bmi.toFixed(1)}</div>
       </div>
       <p className="bmi-suggestion">{suggestion}</p>
-      </div>
-      
-   
- 
+    </div>
   );
 };
 
-export default BmiWidget;
+export default BMIWidget;

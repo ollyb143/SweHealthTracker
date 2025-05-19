@@ -1,9 +1,9 @@
 import express from 'express';
 import { getProfile, updateProfile } from '../controllers/profileController.js';
-import { verifyToken } from '../middleware/authMiddleware.js';
+import sessionChecker from '../middleware/sessionChecker.js';
 const router = express.Router();
 
-router.get('/', verifyToken, getProfile);
-router.put('/', verifyToken, updateProfile);
+router.get('/', sessionChecker, getProfile);
+router.put('/', sessionChecker, updateProfile);
 
 export default router; 

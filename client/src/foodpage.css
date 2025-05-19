@@ -1,154 +1,107 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
-    margin: 0;
-    padding: 0;
-    
+
+.exercise-form {
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
+}
+
+.exercise-form p.section-subtitle {
+  margin-bottom: 1.5rem;
+  color: #444;
+}
+
+.exercise-form .data-time,
+.exercise-form .exercise-type {
+  margin-bottom: 1.25rem;
+}
+
+.exercise-form input[type="text"],
+.exercise-form input[type="number"],
+.exercise-form input[type="date"] {
+  margin-bottom: 1rem;
 }
 
 
+.chart-container {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
 
+.chart-container summary {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 1rem 0;
+  cursor: pointer;
+}
 
-.daily-calories{
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    flex: 1; 
-    min-width: 280px; 
-    box-sizing: border-box;
-    text-align: center;
-    margin: 3%;
+.logs-list {
+  margin-bottom: 1.5rem;
+}
 
+.log-card {
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.log-details span {
+  font-size: 0.95rem;
+}
+
+#log-btn {
+  width: 100%;
+  background: linear-gradient(90deg, #cbfdda, #96bbff);
+  color: #000;
+  padding: 12px;
+  border: 1px solid #7291b9;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 8px;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+#log-btn:hover {
+  background: linear-gradient(90deg, #9ff5c9, #779ff7);
+  transform: translateY(-2px);
 }
 
 
-.calorie-progress{
-    display: flex;
-    width: 100%;
-    box-sizing: border-box;
-    height: 100px;
+.edit-btn {
+  background: rgb(197, 220, 236);
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #555;
+  transition: color 0.2s;
+  margin-left: 0.5rem;
+}
+
+.edit-btn:hover {
+  color: #333;
 }
 
 
-
-.food-log {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin: 3%;
+.cards-container {
+  padding: 3rem 2rem;
+  gap: 3rem;
 }
 
-
-.meal-section {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    flex: 1; 
-    min-width: 280px; 
-    box-sizing: border-box;
+.cards-container .card {
+  padding: 2rem;
 }
 
-
-.consumable-list {
-    margin-bottom: 12px;
+.input-pair {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
 }
 
-.consumable-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px;
-    background-color: #f4f4f4;
-    border-radius: 6px;
-    margin-bottom: 8px;
+.input-pair input {
+  flex: 1 1 200px;
+  padding: 8px;
+  border-radius: 16px;
+  border: 1px solid #7291b9;
+  font-size: 14px;
+  box-sizing: border-box;
 }
-
-.delete-btn {
-    background-color: #96bbff;
-    color: white;
-    border: none;
-    padding: 6px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.delete-btn:hover {
-    background-color: #c8f9dc;
-}
-
-
-.meal-calorie-count {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px;
-    background-color: #f4f4f4;
-    border-radius: 6px;
-    margin-top: 12px;
-}
-
-
-.food-dropdown {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-}
-
-
-
-.add-food-btn,
-.custom-food-btn {
-    background-color: #9dc5fb;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    width: 100%;
-    transition: background-color 0.6s ease;
-}
-
-.add-food-btn:hover,
-.custom-food-btn:hover {
-    background-color: #c8f9dc;
-    
-}
-
-
-.custom-food-section{
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 3%;
-    margin-bottom: 10%;
-}
-
-.custom-food-input, .custom-calorie-input {
-    width: 100%; 
-    padding: 8px;
-    margin-bottom: 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    box-sizing: border-box; 
-}
-
-
-
-@media (max-width: 768px) {
-    .food-log {
-        flex-direction: column;
-    }
-
-    .meal-section {
-        width: 100%; 
-    }
-}
-

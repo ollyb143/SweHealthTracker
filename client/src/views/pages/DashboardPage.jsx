@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
-import Navbar from "../../components/NavBar";
 import Card from "../../components/Card";
 import GradientContainer from "../../components/Gradient";
-import Buttoncomponent from "../../components/Buttoncomponent"
-import BMIWidget from "../../components/BMIScale"
-import { logoutUser } from "../../../store/userSlice";
-import "../../dashboard.css";
+import Buttoncomponent from "../../components/Buttoncomponent";
+import BMIWidget from "../../components/BMIScale";
 import {
   LineChart,
   Line,
@@ -17,299 +15,235 @@ import {
   Tooltip,
   CartesianGrid,
   ResponsiveContainer,
-} from 'recharts';
+} from "recharts";
+import { logoutUser } from "../../../store/userSlice";
+import "../../dashboard.css";
 
-
-
-const DashboardPage = () => {
-  const [exercises, setExercises] = useState([]);
-  const { token } = useSelector((state) => state.user);
-  const navigate = useNavigate();
+export default function DashboardPage() {
   const dispatch = useDispatch();
-  const [weightInput, setWeightInput] = useState('');
-  const [weightHistory, setWeightHistory] = useState([]);
-  const [dateInput, setDateInput] = useState(""); 
-  const [weightError, setWeightError] = useState('');
-  const [bmiRefreshKey, setBmiRefreshKey] = useState(0);
-  const [viewMode, setViewMode] = useState('daily');
+  const navigate = useNavigate();
 
- 
+  // State
+  const [weightHistory, setWeightHistory] = useState(null);
+  const [wtError, setWtError] = useState("");
+  const [chartView, setChartView] = useState("all");
+  const [weightInput, setWeightInput] = useState("");
+  const [dateInput, setDateInput] = useState("");
+  const [weightFormError, setWeightFormError] = useState("");
+  const [bmiRefresh, setBmiRefresh] = useState(0);
+  const [popupText, setPopupText] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
 
+  const API_BASE = "http://localhost:3000/api";
 
+  // Auth check on mount
   useEffect(() => {
-    if (!token) {
-      // Redirect to login if the user is not logged in
-      navigate("/login");
-    }
-
-    // Fetch the exercises logged by the user
-    const fetchExercises = async () => {
+    (async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/exercise", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
+        const res = await fetch(`${API_BASE}/auth/check`, {
+          credentials: "include",
         });
-
-        if (!res.ok) {
-          throw new Error("Failed to fetch exercises");
-        }
-
-        const data = await res.json();
-        setExercises(data);
-      } catch (err) {
-        console.error("Error fetching exercises:", err);
+        if (!res.ok) throw new Error("Unauthorized");
+      } catch {
+        dispatch(logoutUser());
+        navigate("/login", { replace: true });
       }
-    };
+    })();
+  }, [dispatch, navigate]);
 
-    fetchExercises();
-  }, [token, navigate]);
-
-  const handleLogout = () => {
-    dispatch(logout());
+  const handleLogout = async () => {
+    await fetch(`${API_BASE}/auth/logout`, {
+      method: "POST",
+      credentials: "include",
+    });
+    dispatch(logoutUser());
     navigate("/login");
   };
 
-  //weight stuff
+  const handleClosePopup = () => {
+    setShowPopup(false);
+    handleLogout();
+  };
 
+  // Fetch weight history
   const fetchWeightHistory = async () => {
     try {
-      const res = await fetch('http://localhost:3000/api/dashboard/weightHistory', {
-        headers: { Authorization: `Bearer ${token}` },
+      const res = await fetch(`${API_BASE}/dashboard/weightHistory`, {
+        credentials: "include",
       });
-  
-      const data = await res.json();
-  
-      if (Array.isArray(data)) {
-        setWeightHistory(data);
-      } else {
-        console.warn("Expected array but got:", data);
-        setWeightHistory([]); 
-      }
-  
+      if (res.status === 401) throw new Error("Session expired");
+      if (!res.ok) throw new Error("Failed to fetch weight logs");
+      setWeightHistory(await res.json());
     } catch (err) {
-      console.error('Error fetching weight history:', err);
-      setWeightHistory([]); 
+      setWeightHistory([]);
+      setWtError(err.message);
+      setPopupText(err.message);
+      setShowPopup(true);
     }
   };
 
-
-  
-  const handleLogWeight = async () => {
-
-
-    const selectedDate = new Date(dateInput);
-    const currentDate = new Date();
-    const parsedWeight = parseFloat(weightInput);
-
-
-    if (!weightInput) {
-      setWeightError("Weight is required.");
-      return;
-    }
-
-
-    if (selectedDate > currentDate) {
-      setWeightError("You cannot log weight for a future date");
-      return;
-    }
-
-    if (parsedWeight <= 20 || parsedWeight > 700) {
-      setWeightError("Weight must be between 20 and 700 kg.");
-      return;
-    }
-
-    
-    
-
-    try {
-      const res = await fetch('http://localhost:3000/api/dashboard/logWeight', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({ weight: parseFloat(weightInput), date: dateInput })
-      });
-
-      if (res.ok) {
-        setWeightInput('');
-        setDateInput('');
-        setWeightError('');
-        fetchWeightHistory(); 
-        setBmiRefreshKey(prev => prev + 1);
-
-
-
-        console.log('Weight log added successfully');
-      } else {
-        console.warn('Failed to log weight');
-      }
-    } catch (err) {
-      console.error('Error logging weight:', err);
-    }
-  };
-
-  const handleDeleteWeight = async (weightID) => {
-    try {
-      const response = await fetch(`http://localhost:3000/api/dashboard/deleteWeightLog/${weightID}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${token}`, 
-        },
-      });
-  
-      if (!response.ok) {
-        throw new Error('Failed to delete weight log');
-      }
-  
-      setWeightHistory((prevLogs) => prevLogs.filter((log) => log.weightID !== weightID));
-  
-      console.log('Weight log deleted successfully');
-    } catch (error) {
-      console.error('Error deleting weight log:', error);
-      console.error('Failed to delete weight log');
-    }
-  };
- 
   useEffect(() => {
-    if (token) fetchWeightHistory();
-  }, [token]);
+    fetchWeightHistory();
+  }, []);
 
+  // Log new weight
+  const handleLogWeight = async () => {
+    setWeightFormError("");
+    const w = parseFloat(weightInput);
+    const date = new Date(dateInput);
+    if (!weightInput) return setWeightFormError("Weight is required.");
+    if (date > new Date()) return setWeightFormError("Date cannot be in the future.");
+    if (w <= 20 || w > 700) return setWeightFormError("Weight must be 20–700 kg.");
 
-  const formattedWeightData = [...weightHistory].sort((a, b)=> new Date(a.date)-new Date(b.date)).map
-  (log => ({
+    try {
+      const res = await fetch(`${API_BASE}/dashboard/logWeight`, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ weight: w, date: dateInput }),
+      });
+      if (!res.ok) throw new Error("Failed to log weight");
+      setWeightInput("");
+      setDateInput("");
+      await fetchWeightHistory();
+      setBmiRefresh((k) => k + 1);
+    } catch (err) {
+      setWeightFormError(err.message);
+    }
+  };
 
-    date: new Date(log.date).toLocaleDateString(), 
-    weight: log.weight
-  }));
+  // Delete weight entry
+  const handleDeleteWeight = async (id) => {
+    try {
+      const res = await fetch(`${API_BASE}/dashboard/deleteWeightLog/${id}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+      if (!res.ok) throw new Error("Failed to delete weight log");
+      setWeightHistory((prev) => prev.filter((entry) => entry.weightID !== id));
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-  
+  // Prepare chart data
+  const chartData = (weightHistory || [])
+    .filter((log) => {
+      const d = new Date(log.date),
+        now = new Date();
+      if (chartView === "30days") {
+        const cutoff = new Date(now);
+        cutoff.setDate(now.getDate() - 30);
+        return d >= cutoff;
+      }
+      if (chartView === "1year") {
+        const cutoff = new Date(now);
+        cutoff.setFullYear(now.getFullYear() - 1);
+        return d >= cutoff;
+      }
+      return true;
+    })
+    .sort((a, b) => new Date(a.date) - new Date(b.date))
+    .map((log) => ({
+      date: new Date(log.date).toLocaleDateString(),
+      weight: log.weight,
+    }));
 
- 
   return (
-    <div>
-      <Navbar />
-      <header>
+    <div className="dashboard-page">
+      <NavBar />
+
+      <header className="dashboard-welcome">
         <h1>Your Dashboard</h1>
-        <button onClick={logoutUser} className="logout-button">
-          Logout
-        </button>
+        <p>Use the weight log tracker below to view your progress and BMI</p>
       </header>
 
       <main>
-        <section>
-          <h2>Logged Exercises</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Exercise Type</th>
-                <th>Duration (minutes)</th>
-                <th>Distance (km)</th>
-                <th>Calories Burned</th>
-                <th>Entry Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {exercises.length === 0 ? (
-                <tr>
-                  <td colSpan="5">No exercises logged yet.</td>
-                </tr>
-              ) : (
-                exercises.map((exercise) => (
-                  <tr key={exercise.id}>
-                    <td>{exercise.exerciseType}</td>
-                    <td>{exercise.duration}</td>
-                    <td>{exercise.distance}</td>
-                    <td>{exercise.caloriesBurned}</td>
-                    <td>{new Date(exercise.entryDate).toLocaleDateString()}</td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </section>
+        <Card className="weight-card">
+          <GradientContainer>
+            <h2>Weight Log</h2>
+          </GradientContainer>
 
-
-        
-
-        <div>
-          <Card className="weight-card">
-
-          <GradientContainer className="weight-title"><h1>Weight Log</h1></GradientContainer>
-
-          <div className="view-mode-selector">
-            <label>View by: </label>
-            <select value={viewMode} onChange={(e) => setViewMode(e.target.value)}>
-              <option value="daily">Day</option>
-              <option value="monthly">Month</option>
-              <option value="yearly">Year</option>
+          <div className="chart-view-selector">
+            <label htmlFor="view">View:</label>
+            <select
+              id="view"
+              value={chartView}
+              onChange={(e) => setChartView(e.target.value)}
+            >
+              <option value="all">All</option>
+              <option value="30days">Past 30 Days</option>
+              <option value="1year">Past Year</option>
             </select>
           </div>
 
-
-          {formattedWeightData.length > 0 && (
-          <div>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={formattedWeightData} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" />
-              <YAxis />
-              <Tooltip />
-              <Line type="monotone" dataKey="weight" stroke="#82dce1" strokeWidth={3} />
+          {chartData.length > 0 ? (
+            <ResponsiveContainer width="100%" height={250}>
+              <LineChart data={chartData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="date" />
+                <YAxis />
+                <Tooltip />
+                <Line type="monotone" dataKey="weight" />
               </LineChart>
             </ResponsiveContainer>
-          </div>
+          ) : wtError ? (
+            <p className="error">{wtError}</p>
+          ) : (
+            <p className="no-data">No weight data yet.</p>
           )}
-        
 
-          <div className="weight-information">
-            <div className="weight-logs">
-            <h4>Your weight logs</h4>
-              
-            <ul className="weight-ul">
-            {weightHistory.map((log, index) => (
-              <li className="weight-entry" key={index}>
-                {new Date(log.date).toLocaleDateString()} — {log.weight} kg
-                <button className="weight-delete"onClick={() => handleDeleteWeight(log.weightID)}>✖</button>
-              </li>
-            ))}
-            </ul>
+          <div className="weight-info">
+            <div className="logs">
+              <h4>Logs</h4>
+              {(weightHistory || []).map((log) => (
+                <div key={log.weightID} className="log-entry">
+                  <span>
+                    {new Date(log.date).toLocaleDateString()} — {log.weight} kg
+                  </span>
+                  <button onClick={() => handleDeleteWeight(log.weightID)}>✖</button>
+                </div>
+              ))}
             </div>
 
-            <div className="weight-logger">
-            <h4 className="log-your-weight">Log your weight</h4>
-              <input type="number"
-                        value={weightInput}
-                        onChange={(e) => setWeightInput(e.target.value)}
-                        placeholder="Enter your weight (kg)"
-                        className="input-field"
+            <div className="logger">
+              <h4>Log Weight</h4>
+              <div className="log-weight-fields">
+              <input
+                type="number"
+                value={weightInput}
+                onChange={(e) => setWeightInput(e.target.value)}
+                placeholder="Weight (kg)"
               />
               <input
-                    type="date"
-                    value={dateInput}
-                    onChange={(e) => setDateInput(e.target.value)}
-                    className="input-field"
+                type="date"
+                value={dateInput}
+                onChange={(e) => setDateInput(e.target.value)}
               />
-            <Buttoncomponent onClick={handleLogWeight}>Log Weight</Buttoncomponent>
-            {weightError && <p className="weight-error-message">{weightError}</p>}
+              <Buttoncomponent onClick={handleLogWeight}>Log</Buttoncomponent>
+              {weightFormError && <p className="error">{weightFormError}</p>}
+              </div>
             </div>
           </div>
-
-          </Card>
-        </div>
-
-        <Card className="BMI-card">
-        <BMIWidget  refreshKey={bmiRefreshKey}/>
         </Card>
 
-
+        <Card className="bmi-card">
+          <BMIWidget refreshKey={bmiRefresh} />
+        </Card>
       </main>
+
+      {showPopup && (
+        <div className="popup-overlay">
+          <div className="popup">
+            <button className="popup-close" onClick={handleClosePopup}>
+              ×
+            </button>
+            <p>{popupText}</p>
+          </div>
+        </div>
+      )}
+
       <Footer />
     </div>
   );
-};
-
-export default DashboardPage;
+}

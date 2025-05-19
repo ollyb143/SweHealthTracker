@@ -1,13 +1,12 @@
-import express from 'express';
-import { verifyToken } from '../middleware/authMiddleware.js';
-import { logWeight, getWeightHistory, deleteWeightLog } from '../controllers/dashboardController.js';
+import express from "express";
+import sessionChecker from "../middleware/sessionChecker.js";
+import { logWeight, getWeightHistory, deleteWeightLog } from "../controllers/dashboardController.js";
 
 const router = express.Router();
+router.use(sessionChecker);
 
-router.post('/logWeight', verifyToken, logWeight);
-router.get('/weightHistory', verifyToken, getWeightHistory);
-router.delete('/deleteWeightLog/:weightID', verifyToken,deleteWeightLog);
-  
+router.post("/logWeight", logWeight);
+router.get("/weightHistory", getWeightHistory);
+router.delete("/deleteWeightLog/:weightID", deleteWeightLog);
 
 export default router;
-   
