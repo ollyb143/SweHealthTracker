@@ -9,6 +9,8 @@ return knex.schema.createTable("account", (table) => {
     table.string("username", 50).unique().notNullable();
     table.string("password", 50).notNullable();
     table.string("email", 50).unique().notNullable();
+    table.text("resetCode");
+    table.bigInteger("resetCodeExpires");
     });
 };
 

@@ -1,18 +1,39 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-/*css reset*/
-.input-field {
-  flex: 1;
-  padding: 0.6rem 1rem;
-  border: 1px solid #ccc;
-  border-radius: 25px;
-  font-size: 1rem;
-  width: 100%;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
-  transition: border-color 0.2s ease;
-  text-align: center;
 }
 
+html {
+  filter: brightness(0.88);
+  height: 100%;
+}
+
+main {
+  padding-bottom: 2rem; 
+}
+
+
+.input-field {
+flex: 1;
+padding: 0.6rem 1rem;
+border: 1px solid #ccc;
+border-radius: 25px;
+font-size: 1rem;
+width: 100%;
+box-sizing: border-box;
+transition: border-color 0.2s ease;
+text-align: center;
+margin-bottom: 0.3rem;
+}
+
+input:focus{
+outline: none;
+border-color: #82dce2;
+}
+
+a {
+color: #5bd0d6;
+font-weight: 600;
+text-decoration: none;
+}

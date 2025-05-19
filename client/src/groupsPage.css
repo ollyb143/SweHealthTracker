@@ -1,0 +1,292 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6f8;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard-welcome {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: linear-gradient(90deg, #72cce4, #4a90e2);
+  color: white;
+}
+
+.dashboard-welcome h1 {
+  margin: 0 0 0.5rem;
+  font-size: 2.5rem;
+}
+
+.dashboard-welcome p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.groups-container .gf__submit {
+  background: linear-gradient(90deg, #cbfdda, #96bbff) !important;
+  color: #000;
+  font-weight: 600;
+  border: 1px solid #7291b9;
+  border-radius: 16px;
+  width: 95%;
+  padding: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.buttoncomponent.gradient {
+  background: linear-gradient(90deg, #cbfdda, #96bbff) !important;
+  color: #000;
+  font-weight: 600;
+  border: 1px solid #7291b9;
+  border-radius: 16px;
+  width: 95%;
+  padding: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.buttoncomponent.gradient:hover {
+  background: linear-gradient(90deg, #aef0c9, #82a8f7) !important;
+  transform: translateY(-2px);
+}
+
+
+.card,
+.goals-container,
+.goals-list,
+.goals-groups {
+  max-width: 800px;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+
+.goals-container .gradient-container,
+.goals-list .gradient-container,
+.goals-groups .gradient-container {
+  padding: 1rem;
+}
+
+
+
+.form-grid input,
+.form-grid select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+}
+
+.form-grid input:focus,
+.form-grid select:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+
+.activity-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.activity-buttons button {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color .2s, border-color .2s;
+}
+
+.activity-buttons button.selected {
+  background: #4a90e2;
+  color: #fff;
+  border-color: #4a90e2;
+}
+
+.activity-buttons button:hover {
+  background: #f0f4f8;
+}
+
+.buttoncomponent,
+.goals-container>button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  background: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background-color .2s;
+}
+
+.buttoncomponent:hover,
+.goals-container>button:hover {
+  background: #357ab8;
+}
+
+.error {
+  color: #c0392b;
+  text-align: center;
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+}
+
+
+
+.goals-list ul {
+  list-style: none;
+  padding: 0 1.5rem 1.5rem;
+  margin: 0;
+}
+
+.goals-list li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e1e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.goals-list li:last-child {
+  border-bottom: none;
+}
+
+.goals-list label {
+  flex: 1;
+  cursor: pointer;
+}
+
+.goals-list input[type="checkbox"] {
+  margin-right: 0.5rem;
+  transform: scale(1.2);
+}
+
+.goal-actions button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  color: #7291b9;
+  transition: color .2s;
+}
+
+.goal-actions button:hover {
+  color: #4a90e2;
+}
+
+.groups-container .create-group-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.groups-container .create-group-form .input-field {
+  width: 95%;
+  max-width: none;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border-radius: 25px;  
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+
+
+.groups-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem 1.5rem;
+}
+
+.groups-inline li {
+  background: #e5eef9;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.popup {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  max-width: 300px;
+  text-align: center;
+  position: relative;
+}
+
+.popup-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.goals-container .gf__submit {
+  background: linear-gradient(90deg, #cbfdda, #96bbff) !important;
+  color: #000;
+  font-weight: 600;
+  border: 1px solid #7291b9;
+  border-radius: 16px;
+  width: 95%;
+  padding: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.goals-container .gf__submit:hover {
+  background: linear-gradient(90deg, #aef0c9, #82a8f7);
+  transform: translateY(-2px);
+}
+
+
+@media (max-width: 600px) {
+
+  .goals-container,
+  .goals-list,
+  .goals-groups {
+    margin: 1rem;
+  }
+
+  .form-grid {
+    display: block;
+  }
+}

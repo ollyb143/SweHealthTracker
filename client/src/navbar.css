@@ -1,16 +1,13 @@
-/********************************************** NavBar.css *******************************************/
 
-/* General Styles */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
 }
 
-/* Navbar */
 .navbar {
-  background-color: #182d5a; /* Blue background */
+  background-color: #182d5a;
   color: white;
-  padding: 20px 20px;
+  padding: 13px 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -22,13 +19,13 @@ body {
   margin: 0 auto;
 }
 
-/* Logo */
+
 .logo {
   font-size: 24px;
   font-weight: bold;
 }
 
-/* Desktop Menu */
+
 .nav-links {
   list-style: none;
   display: flex;
@@ -47,10 +44,10 @@ body {
 }
 
 .nav-links a:hover {
-  color: #93c5fd; /* Light blue on hover */
+  color: #93c5fd; 
 }
 
-/* Mobile Menu Button */
+
 .nav-menu-button {
   display: none;
   font-size: 24px;
@@ -61,7 +58,6 @@ body {
   padding: 10px;
 }
 
-/* Mobile Menu */
 .nav-mobile-menu {
   background-color: #182d5a;
   list-style: none;
@@ -82,7 +78,7 @@ body {
 }
 
 .nav-mobile-menu a:hover {
-  background-color: #1e3a8a; /* Darker blue on hover */
+  background-color: #1e3a8a; 
 }
 
 .logout-button {
@@ -94,14 +90,12 @@ body {
   padding: 0;
 }
 
-
-/* Responsive Design */
 @media (max-width: 768px) {
   .nav-links {
-    display: none; /* Hides desktop menu on smaller screens */
+    display: none; 
   }
 
   .nav-menu-button {
-    display: block; /* Shows the mobile menu button */
+    display: block;
   }
 }
