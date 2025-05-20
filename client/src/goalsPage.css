@@ -1,34 +1,30 @@
-body {
-  font-family: "Segoe UI", sans-serif;
-  background-color: #f4f6f8;
-  color: #333;
-  margin: 0;
-  padding: 0;
-}
 
-.goals-container {
-  max-width: 800px;
-  margin: 2rem auto;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+
+.goals-card {
+  max-width: 80%;
+  justify-content: center;
+  text-align: center;
   overflow: hidden;
 }
-.goals-container .gradient-container {
-  padding: 1rem;
+.last-goals-card{
+    max-width: 80%;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+    margin-bottom: 8rem;
 }
-.goals-container h1 {
-  margin: 0;
+.goals-card .input-field {
+  margin-top: 1rem;
 }
 
-.goals-container .gf__error {
+.gf__error {
   color: #c0392b;
   text-align: center;
   margin: 0.5rem 0;
   font-size: 0.95rem;
 }
 
-.goals-container .gf__form {
+.goals-container .gf-form {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
@@ -38,6 +34,7 @@ body {
 .goals-container .gf__form > * {
   box-sizing: border-box;
 }
+
 
 .goals-container .gf__form input,
 .goals-container .gf__form select {
@@ -51,59 +48,48 @@ body {
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.goals-container .gf__form input:focus,
-.goals-container .gf__form select:focus {
-  outline: none;
-  border-color: #4a90e2;
-  box-shadow: 0 0 0 3px rgba(74,144,226,0.2);
+.goals-ul{
+  list-style-type: none;
+  margin: 1rem;
 }
 
-.goals-container .gf__buttons {
-  flex: 1 1 100%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
+.goals-checkbox{
+    margin-right:0.4rem;
 }
 
-.goals-container .gf__buttons button {
-  flex: 1 1 120px;
-  padding: 0.5rem;
-  border: 1px solid #7291b9;
-  border-radius: 6px;
-  background: #fff;
-  color: #333;
+.goal-actions button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  color: #7291b9;
+  transition: color .2s;
 }
 
-.goals-container .gf__buttons button.selected {
-  background: #4a90e2;
-  color: #fff;
-}
 
-.goals-container .gf__buttons button:hover {
-  background: #e8f1fb;
-}
-
-.goals-container .gf__submit {
-  width: 100%;
-  background: linear-gradient(90deg, #cbfdda, #96bbff);
-  color: #000;
-  padding: 12px;
-  border: 1px solid #7291b9;
+.goals-card .meal-buttons button {
+  padding: 12px 20px;
+  border: 1px solid #82dce2;
   border-radius: 8px;
+  background: white;
   cursor: pointer;
   font-size: 16px;
-  margin-top: 8px;
-  font-weight: 600;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
-.goals-container .gf__submit:hover {
-  background: linear-gradient(90deg, #aef0c9, #82a8f7);
-  transform: translateY(-2px);
+.goals-card .meal-buttons button.selected {
+ background: #82dce2;
+  color: white;
 }
+
+.goals-card .meal-buttons button:hover {
+  background: #82dce2;
+  color: white;
+}
+
+
+
 
 @media (max-width: 600px) {
   .goals-container .gf__form {

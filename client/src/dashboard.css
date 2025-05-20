@@ -1,13 +1,33 @@
+  .dashboard-welcome {
+    text-align: center;
+    background: linear-gradient(90deg, #bfefe3, #529bee); 
+    color: white;
+    padding: 2rem 1rem;
+  }
+  
+  .dashboard-welcome h1 {
+    margin: 0 0 .5rem;
+    font-size: 2.5rem;
+  }
+  
+  .dashboard-welcome p {
+    margin: 0 0 1rem;
+    font-size: 1.1rem;
+  }
+
 .weight-card, .BMI-card{
     text-align: center;
     max-width: 75%;
     margin-bottom:6rem;
     padding: 3rem;
+
 }
 
 .weight-title{
     margin-bottom: 1.5rem;
+
 }
+
 
 
 .weight-information{
@@ -15,6 +35,7 @@
     gap: 4rem;
     margin: 0.4rem 1.7rem;
     justify-content: center;
+
 }
 
 .weight-ul{
@@ -36,12 +57,16 @@
     min-width: 2rem;
     margin-left: 1rem;
     font-weight: 1000;
+  
+ 
+
 }
 
 .weight-delete:hover{
     background-color:#83dce2;
     color: white;
 }
+
 
 .weight-logs, .weight-logger {
     flex: 1;
@@ -61,113 +86,10 @@
     margin-bottom: 0.8rem;
 }
 
-.dashboard-page {
-    font-family: "Segoe UI", sans-serif;
-    color: #333;
-    margin: 0;
-    padding: 0;
-  }
 
 
-  
-  .dashboard-welcome {
-    text-align: center;
-    background: linear-gradient(90deg, #78cee6, #529bee); 
-    color: white;
-    padding: 2rem 1rem;
-  }
-  
-  .dashboard-welcome h1 {
-    margin: 0 0 .5rem;
-    font-size: 2.5rem;
-  }
-  
-  .dashboard-welcome p {
-    margin: 0 0 1rem;
-    font-size: 1.1rem;
-  }
-  
-  .logout-button {
-    background: #e94e77;
-    border: none;
-    color: white;
-    padding: 0.6rem 1.2rem;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .logout-button:hover {
-    opacity: 0.9;
-  }
-  
-  .weight-card,
-  .bmi-card {
-    margin: 2rem auto;
-    max-width: 800px;
-  }
-  
-  .chart-view-selector {
-    display: flex;
-    align-items: center;
-    margin: 1rem 0;
-  }
-  
-  .chart-view-selector label {
-    margin-right: 0.5rem;
-  }
-  
-  .weight-info {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-  
-  .logs, .logger {
-    flex: 1 1 48%;
-    margin: 1rem 0;
-  }
-  
-  .log-entry {
-    display: flex;
-    justify-content: space-between;
-    background: #f9f9f9;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-    border-radius: 4px;
-  }
-  
-  .no-data {
-    text-align: center;
-    color: #777;
-    padding: 1rem 0;
-  }
-  
-  .error {
-    color: #c0392b;
-    margin-top: 0.5rem;
-  }
-  
-  .logger button {
-    padding: 12px;
-    border-radius: 16px;
-    font-size: 16px;
-    width: 100%;
-    margin-top: 0.5rem;
-    background: linear-gradient(90deg, #cbfdda, #96bbff);
-    color: #000;
-    font-weight: 600;
-    border: 1px solid #7291b9; 
-    cursor: pointer;
-    transition: transform 0.2s ease;
-  }
-  
-  .logger button:hover {
-    background: linear-gradient(90deg, #9ff5c9, #779ff7);
-    transform: translateY(-2px);
-    opacity: 1; 
-  }
-  
-  
+
+
 
 @media (max-width: 768px) {
     .weight-information {
@@ -179,24 +101,4 @@
         max-height: 16rem;
         min-width: 100%;
       }
-}
-
-.log-weight-fields {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-}
-
-.log-weight-fields input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 16px;
-  border: 1px solid #7291b9;
-  font-size: 14px;
-  box-sizing: border-box;
-}
-
-.log-weight-fields input:focus {
-  outline: none;
-  border-color: #4a90e2;
 }

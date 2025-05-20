@@ -1,62 +1,33 @@
-body {
-  font-family: Arial, sans-serif;
-  background: #f8f8f8;
-  margin: 0;
-  padding: 0;
-}
 
-.page-header {
-  background: linear-gradient(to right, #ccfed8, #95b9ff);
+.exercise-card {
+  max-width: 60%; 
   text-align: center;
-  padding: 20px;
-  margin-top: 40px;
+  justify-content: center;
 }
-.page-header h1 {
-  margin: 0;
-  font-size: 2rem;
-  color: #333;
+.exercise-label{
+    margin: 0.6rem;
 }
 
-.container {
-  max-width: 1400px; 
-  margin: 30px auto;
-  margin-top: 20px;
-  padding: 0 30px;
-  padding-top: 2rem !important;
-}
-
-.section-title {
-  font-size: 1.25rem;
-  margin-bottom: 8px;
-  color: #000;
-  text-align: left;
-}
-.section-subtitle {
-  font-size: 0.875rem;
-  color: #000;
-  margin-bottom: 24px;
-  text-align: left;
-}
 
 .main-content {
   display: flex;
   gap: 40px; 
   align-items: flex-start;
   justify-content: center;
-  padding: 2rem 1rem;
+  margin-top: 1.3rem;
   flex-wrap: wrap;
+ 
+  
 }
 
-.excerise-form,
 .chart-container {
-  flex: 1 1 48%; 
-  min-width: 400px; 
-  max-width: 650px;
-  padding: 1.5rem 2rem; 
+  flex: 1 1 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+
   box-sizing: border-box;
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  width: 100%;
 }
 
 .container {
@@ -66,19 +37,8 @@ body {
 }
 
 
-.excerise-form input {
-  width: 100%;
-  padding: 8px;
-  border-radius: 16px;
-  border: 1px solid #7291b9;
-  font-size: 14px;
-  margin-bottom: 12px;
-  box-sizing: border-box;
-}
-.excerise-form input:focus {
-  border-color: #182d5a;
-  outline: none;
-}
+
+
 
 .buttons {
   display: flex;
@@ -108,11 +68,13 @@ body {
 
 .chart-container .responsive-chart {
   width: 100%;
+  max-width: 650px;
   height: 300px;
-  margin-top: 8px;
+  margin: 1rem auto 0;
 }
 
 .week-nav {
+    margin-top: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -161,24 +123,37 @@ body {
   border-radius: 4px;
 }
 
+.log-cards {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding: 1rem 0;
+  scroll-behavior: smooth;
+}
+
 .scroll-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.9);
+  background: #fff;
   border: none;
   font-size: 2rem;
   width: 40px;
   height: 40px;
   cursor: pointer;
-  border-radius: 4px;
   z-index: 10;
+  opacity: 80%;
+  transition: ease 0.3s;
+  border-radius: 0.3rem;
+}
+.scroll-btn:hover{
+  opacity: 100%;
 }
 .scroll-btn.left {
-  left: 0;
+   left: 0rem;
 }
 .scroll-btn.right {
-  right: 0;
+  right: 0.5rem;
 }
 
 .log-card {
@@ -208,17 +183,7 @@ body {
 .log-calories {
   opacity: 0.85;
 }
-.delete-btn {
-  background: rgb(197, 220, 236) !important;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-  color: #e74c3c;
-  transition: color 0.2s;
-}
-.delete-btn:hover {
-  color: #c0392b;
-}
+
 
 .no-entries {
   text-align: center;
@@ -226,55 +191,16 @@ body {
   font-style: italic;
 }
 
-.gradient-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px 0;
-  text-align: center;
-}
 
-.buttoncomponent.log-exercise-btn {
-  background: linear-gradient(90deg, #cbfdda, #96bbff) !important;
-  color: #000;
-  font-weight: 600;
-  border: 1px solid #7291b9;
-  border-radius: 16px;
-  width: 95%;
-  padding: 12px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
 
-.buttoncomponent.log-exercise-btn:hover {
-  background: linear-gradient(90deg, #9ff5c9, #779ff7) !important;
-  transform: translateY(-2px);
-}
 
-.logs-container {
-  max-width: 800px;
-  margin: 2rem auto;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  overflow: hidden;
-}
 
-.logs-container .gradient-container {
-  padding: 1rem;
-}
-
-.cards-wrapper {
-  position: relative;
-  padding: 0 1.5rem 1.5rem;
-}
 
 .log-cards {
   display: flex;
   overflow-x: auto;
   gap: 1rem;
-  padding: 1rem 0;
+  padding: 1rem 4rem;
   scroll-behavior: smooth;
 }
 

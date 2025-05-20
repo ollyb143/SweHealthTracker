@@ -2,11 +2,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
 }
 
-html {
-  filter: brightness(0.88);
-  height: 100%;
+body {
+
+  background-color: #f4f6f8;
+ 
 }
 
 main {
@@ -37,3 +39,7 @@ color: #5bd0d6;
 font-weight: 600;
 text-decoration: none;
 }
+
+
+
+

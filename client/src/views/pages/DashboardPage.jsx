@@ -160,19 +160,13 @@ export default function DashboardPage() {
 
       <main>
         <Card className="weight-card">
-          <GradientContainer>
-            <h2>Weight Log</h2>
-          </GradientContainer>
+          <GradientContainer className="weight-title"><h1>Weight Log</h1></GradientContainer>
 
           <div className="chart-view-selector">
-            <label htmlFor="view">View:</label>
-            <select
-              id="view"
-              value={chartView}
-              onChange={(e) => setChartView(e.target.value)}
-            >
-              <option value="all">All</option>
-              <option value="30days">Past 30 Days</option>
+            <label>View: </label>
+            <select value={chartView} onChange={(e) => setchartView(e.target.value)}>
+              <option value="all">All Logs</option>
+              <option value="30days">Past 30 days</option>
               <option value="1year">Past Year</option>
             </select>
           </div>
@@ -184,7 +178,7 @@ export default function DashboardPage() {
                 <XAxis dataKey="date" />
                 <YAxis />
                 <Tooltip />
-                <Line type="monotone" dataKey="weight" />
+                <Line type="monotone" dataKey="weight" stroke="#82dce1" strokeWidth={3}/>
               </LineChart>
             </ResponsiveContainer>
           ) : wtError ? (
@@ -193,41 +187,44 @@ export default function DashboardPage() {
             <p className="no-data">No weight data yet.</p>
           )}
 
-          <div className="weight-info">
-            <div className="logs">
+          <div className="weight-information">
+            <div className="weight-logs">
               <h4>Logs</h4>
-              {(weightHistory || []).map((log) => (
-                <div key={log.weightID} className="log-entry">
-                  <span>
-                    {new Date(log.date).toLocaleDateString()} — {log.weight} kg
-                  </span>
-                  <button onClick={() => handleDeleteWeight(log.weightID)}>✖</button>
-                </div>
+
+              
+               <ul className="weight-ul">
+                {(weightHistory || []).map((log, index) => (
+                <li className="weight-entry" key={index}>
+                  {new Date(log.date).toLocaleDateString()} — {log.weight} kg
+                  <button className="weight-delete" onClick={() => handleDeleteWeight(log.weightID)}>✖</button>
+                </li>
               ))}
+
+            </ul>
             </div>
 
-            <div className="logger">
-              <h4>Log Weight</h4>
-              <div className="log-weight-fields">
-              <input
-                type="number"
-                value={weightInput}
-                onChange={(e) => setWeightInput(e.target.value)}
-                placeholder="Weight (kg)"
+            <div className="weight-logger">
+            <h4 className="log-your-weight">Log your weight</h4>
+              <input type="number"
+                        value={weightInput}
+                        onChange={(e) => setWeightInput(e.target.value)}
+                        placeholder="Enter your weight (kg)"
+                        className="input-field"
               />
               <input
-                type="date"
-                value={dateInput}
-                onChange={(e) => setDateInput(e.target.value)}
+                    type="date"
+                    value={dateInput}
+                    onChange={(e) => setDateInput(e.target.value)}
+                    className="input-field"
               />
-              <Buttoncomponent onClick={handleLogWeight}>Log</Buttoncomponent>
+            <Buttoncomponent onClick={handleLogWeight}>Log Weight</Buttoncomponent>
               {weightFormError && <p className="error">{weightFormError}</p>}
-              </div>
+          
             </div>
           </div>
         </Card>
 
-        <Card className="bmi-card">
+        <Card className="BMI-card">
           <BMIWidget refreshKey={bmiRefresh} />
         </Card>
       </main>

@@ -1,9 +1,12 @@
+// FoodDrinkPage.jsx
+
 import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
 import GradientContainer from "../../components/Gradient";
 import Card from "../../components/Card";
+import Buttoncomponent from "../../components/Buttoncomponent";
 import "../../foodpage.css";
 
 const API_BASE = "http://localhost:3000/api/fooddrink";
@@ -11,8 +14,8 @@ const MEAL_TYPES = ["Breakfast", "Lunch", "Dinner", "Snack", "Uncategorized"];
 
 export default function FoodDrinkPage() {
   const [consumables, setConsumables] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(
-    () => new Date().toISOString().slice(0, 10)
+  const [selectedDate, setSelectedDate] = useState(() =>
+    new Date().toISOString().slice(0, 10)
   );
   const [name, setName] = useState("");
   const [calories, setCalories] = useState("");
@@ -91,11 +94,7 @@ export default function FoodDrinkPage() {
       if (!res.ok) throw new Error();
       const saved = await res.json();
       setConsumables((prev) =>
-        editId
-          ? prev.map((i) =>
-              i.consumableID === editId ? saved : i
-            )
-          : [...prev, saved]
+        editId ? prev.map((i) => (i.consumableID === editId ? saved : i)) : [...prev, saved]
       );
       resetForm();
     } catch {
@@ -121,9 +120,7 @@ export default function FoodDrinkPage() {
         credentials: "include",
       });
       if (!res.ok) throw new Error();
-      setConsumables((prev) =>
-        prev.filter((i) => i.consumableID !== id)
-      );
+      setConsumables((prev) => prev.filter((i) => i.consumableID !== id));
     } catch {
       console.error("Delete error");
       setError("Failed to delete item.");
@@ -133,43 +130,43 @@ export default function FoodDrinkPage() {
   return (
     <div>
       <NavBar />
-  
+
       <header className="dashboard-welcome">
         <h1>Your Food and Drink</h1>
-        <p>Add your meals below to keep track of what you eat and drink</p>
+        <p>Track your meals by adding what you've consumed</p>
       </header>
 
-      <div className="cards-container">
-        <Card className="card diary-card">
-          <GradientContainer>
-            <h2>{editId ? "Edit Food Item" : "Add Food Item"}</h2>
+      <div className="consumable-container">
+        <Card className="food-card">
+          <GradientContainer className="food-title">
+            <h1>{editId ? "Edit Item" : "Add Item"}</h1>
           </GradientContainer>
-  
-          <section className="exercise-form">
-            {error && <p className="loginError">{error}</p>}
-            <p className="section-subtitle">
-              {editId
-                ? "Modify your recorded meal"
-                : "Enter a new food or drink entry"}
-            </p>
-  
-            <div className="data-time">
+
+          <section className="consumable-form">
+            {error && <p className="error-message">{error}</p>}
+            <h4 className="form-description">
+              {editId ? "Modify your item" : "Enter a new meal or drink"}
+            </h4>
+
+            <div className="form-group date-group">
               <label htmlFor="form-date">Date:</label>
               <input
                 id="form-date"
                 type="date"
                 value={selectedDate}
                 onChange={(e) => setSelectedDate(e.target.value)}
+                className="input-field"
               />
             </div>
-  
-            <div className="exercise-type">
-              <label>Meal Type:</label>
-              <div className="buttons">
+
+
+            <div className="form-group">
+              <h4>Meal Type:</h4>
+              <div className="meal-buttons">
                 {MEAL_TYPES.map((type) => (
                   <button
                     key={type}
-                    className={`type-btn${mealType === type ? " selected" : ""}`}
+                    className={`meal-type-btn${mealType === type ? " selected" : ""}`}
                     onClick={() => setMealType(type)}
                   >
                     {type}
@@ -177,63 +174,54 @@ export default function FoodDrinkPage() {
                 ))}
               </div>
             </div>
-  
+
             <div className="input-pair">
-            <input
-              type="text"
-              placeholder="Name of food/drink"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <input
-              type="number"
-              placeholder="Calories"
-              value={calories}
-              onChange={(e) => setCalories(e.target.value)}
-            />
+              <input
+                type="text"
+                placeholder="Food/Drink Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="input-field"
+              />
+              <input
+                type="number"
+                placeholder="Calories"
+                value={calories}
+                onChange={(e) => setCalories(e.target.value)}
+                className="input-field"
+              />
             </div>
 
-  
-            <button id="log-btn" onClick={handleCreateOrUpdate}>
+            <Buttoncomponent id="log-btn" onClick={handleCreateOrUpdate}>
               {editId ? "Update Item" : "Add Item"}
-            </button>
+            </Buttoncomponent>
           </section>
         </Card>
-  
-        <Card className="card entries-card">
-          <GradientContainer>
-            <h2>Entries for {selectedDate}</h2>
+
+        <Card className="food-card">
+          <GradientContainer className="food-title">
+            <h1>Entries for {selectedDate}</h1>
           </GradientContainer>
-  
-          <section className="chart-container">
+
+          <section className="entry-list">
             {MEAL_TYPES.map((type) => (
               <details key={type} open>
                 <summary>
                   {type} ({grouped[type].length})
                 </summary>
-  
+
                 {grouped[type].length > 0 ? (
                   <ul className="logs-list">
                     {grouped[type].map((item) => (
-                      <li className="log-card" key={item.consumableID}>
-                        <div className="log-details">
-                          <span className="log-type">{item.consumableName}</span>
-                          <span className="log-calories">
-                            {item.consumableCalories} kcal
-                          </span>
+                      <li className="log-entry" key={item.consumableID}>
+                        <div className="log-content">
+                          <span>{item.consumableName}</span>
+                          <span>{item.consumableCalories} kcal</span>
                         </div>
-                        <button
-                          className="delete-btn"
-                          onClick={() => handleDelete(item.consumableID)}
-                        >
-                          &times;
-                        </button>
-                        <button
-                          className="edit-btn"
-                          onClick={() => handleEdit(item)}
-                        >
-                          ✎
-                        </button>
+                        <div className="log-actions">
+                          <button className="edit-btn" onClick={() => handleEdit(item)}>✎</button>
+                          <button className="delete-btn" onClick={() => handleDelete(item.consumableID)}>&times;</button>
+                        </div>
                       </li>
                     ))}
                   </ul>
@@ -245,9 +233,8 @@ export default function FoodDrinkPage() {
           </section>
         </Card>
       </div>
-  
+
       <Footer />
     </div>
   );
-  
 }
