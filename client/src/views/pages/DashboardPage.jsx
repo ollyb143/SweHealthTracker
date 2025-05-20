@@ -164,7 +164,7 @@ export default function DashboardPage() {
 
           <div className="chart-view-selector">
             <label>View: </label>
-            <select value={chartView} onChange={(e) => setchartView(e.target.value)}>
+            <select value={chartView} onChange={(e) => setChartView(e.target.value)}>
               <option value="all">All Logs</option>
               <option value="30days">Past 30 days</option>
               <option value="1year">Past Year</option>
