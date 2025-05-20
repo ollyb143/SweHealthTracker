@@ -26,6 +26,8 @@ export default function GoalsPage() {
   const [error, setError] = useState("");
   const [popupText, setPopupText] = useState("");
   const [showPopup, setShowPopup] = useState(false);
+  const [showSuggestion, setShowSuggestion] = useState(false);
+
 
   // Auth check
   useEffect(() => {
@@ -99,20 +101,34 @@ export default function GoalsPage() {
   };
 
   // Toggle completion
-  const handleToggleGoalCompleted = async (goalID) => {
-    try {
-      const res = await fetch(`${API_BASE}/complete/${goalID}`, {
-        method: "PATCH",
-        credentials: "include",
-      });
-      if (res.status === 401) throw new Error("Session expired");
-      if (!res.ok) throw new Error("Failed to toggle goal completion");
-      await loadGoals();
-    } catch (err) {
-      setPopupText(err.message);
-      setShowPopup(true);
+ const handleToggleGoalCompleted = async (goalID) => {
+  try {
+    const goal = goals.find((g) => g.goalID === goalID);
+    const wasCompleted = goal?.goalCompleted;
+
+    const res = await fetch(`${API_BASE}/complete/${goalID}`, {
+      method: "PATCH",
+      credentials: "include",
+    });
+
+    if (res.status === 401) throw new Error("Session expired");
+    if (!res.ok) throw new Error("Failed to toggle goal completion");
+
+    await loadGoals();
+
+    
+    if (!wasCompleted) {
+      setShowSuggestion(true);
+      setTimeout(() => setShowSuggestion(false), 5000);
     }
-  };
+
+  } catch (err) {
+    setPopupText(err.message);
+    setShowPopup(true);
+  }
+};
+
+
 
   // Delete goal
   const handleDeleteGoal = async (goalID) => {
@@ -230,12 +246,12 @@ export default function GoalsPage() {
           {form.goalID ? "Update Goal" : "Create Goal"}
         </Buttoncomponent>
       </Card>
-
+ 
       <Card className="goals-card">
         <GradientContainer><h1>Pending Goals</h1></GradientContainer>
-        <ul className="goals-ul">
+        <ul className="logs-list">
           {pendingGoals.map((g) => (
-            <li key={g.goalID}>
+            <li className= "log-entry" key={g.goalID}>
               <label>
                 <input
                 className="goals-checkbox"
@@ -245,7 +261,7 @@ export default function GoalsPage() {
                 />
                 <strong>{g.goalName}</strong> — {g.goalType} ({g.targetDescription} {g.targetValue})
               </label>
-              <div>
+              <div className="deadline">
                 Deadline: {new Date(g.deadline).toLocaleDateString()}
                 {g.groupID && (<><br />Group: {groups.find(x=>x.groupID===g.groupID)?.groupName}</>)}
               </div>
@@ -256,22 +272,29 @@ export default function GoalsPage() {
             </li>
           ))}
         </ul>
+        {showSuggestion && (
+          <div className="goal-suggestion">
+            🎉 Great job completing a goal! Ready to set a new one?
+          </div>
+        )}
+
       </Card>
 
       <Card className="goals-card">
         <GradientContainer><h1>Completed Goals</h1></GradientContainer>
-        <ul className="goals-ul">
+        <ul className="logs-list">
           {completedGoals.map((g) => (
-            <li key={g.goalID}>
+            <li className= "log-entry" key={g.goalID}>
               <label>
                 <input
+                className="goals-checkbox"
                   type="checkbox"
                   checked={g.goalCompleted}
                   onChange={() => handleToggleGoalCompleted(g.goalID)}
                 />
                 <strong>{g.goalName}</strong> — {g.goalType}
               </label>
-              <div>Completed: {new Date(g.deadline).toLocaleDateString()}</div>
+              <div className="deadline">Completed: {new Date(g.deadline).toLocaleDateString()}</div>
             </li>
           ))}
         </ul>

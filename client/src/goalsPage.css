@@ -55,7 +55,7 @@
 
 .goals-checkbox{
     margin-right:0.4rem;
-}
+} 
 
 .goal-actions button {
   background: none;
@@ -87,6 +87,25 @@
   background: #82dce2;
   color: white;
 }
+
+.goal-suggestion {
+  background: #e8fdf5;
+ 
+  color: #2c3e50;
+  padding: 1rem;
+  margin: 1rem auto;
+  max-width: 90%;
+  border-radius: 8px;
+  font-size: 1rem;
+  text-align: center;
+  animation: fadeIn 0.4s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 
 
 
