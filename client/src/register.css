@@ -8,6 +8,13 @@
   text-align: center;
 }
 
+.register-welcome{
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+
 .register-box {
   display: flex;
   flex-wrap: wrap;
@@ -42,25 +49,7 @@
   font-weight: bold;
 }
 
-.continue-button {
-  padding: 12px;
-    border-radius: 16px;
-    font-size: 16px;
-    width: 100%;
-    margin-top: 0.5rem;
-    background: linear-gradient(90deg, #cbfdda, #96bbff);
-    color: #000;
-    font-weight: 600;
-    border: 1px solid #7291b9; 
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
 
-.continue-button:hover {
-  background-color: #82dce2;
-  border-color: #82dce2;
-  color: white;
-}
 
 @media (max-width: 600px) {
   .register-row {

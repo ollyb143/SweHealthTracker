@@ -126,7 +126,7 @@ export default function GroupsPage() {
         <ul className="groups-list">
           {groups.length > 0 ? (
             groups.map((g) => (
-              <li key={g.groupID} className="group-item">
+              <li key={g.groupID} className="goals-ul">
                 <span>{g.groupName}</span>
                 <Buttoncomponent
                   className="gradient"
@@ -137,7 +137,7 @@ export default function GroupsPage() {
               </li>
             ))
           ) : (
-            <p>No groups yet.</p>
+            <div className="exercise-label" ><p>No groups yet.</p></div>
           )}
         </ul>
       </Card>

@@ -4,6 +4,7 @@ import Footer from "../../components/Footer";
 import Banner from "../../components/Banner";
 import Card from "../../components/Card";
 import GradientContainer from "../../components/Gradient";
+import Buttoncomponent from "../../components/Buttoncomponent";
 
 const RegisterPage = () => {
   const [form, setForm] = useState({
@@ -79,7 +80,9 @@ const RegisterPage = () => {
             <h1>Register</h1>
           </GradientContainer>
 
-          <p>Welcome to HealthTracker! Please enter your information below.</p>
+          <div className="register-welcome"><p >Welcome to HealthTracker! Please enter your information below.</p></div>
+
+          
 
           <form onSubmit={handleSubmit}>
             <div className="register-box">
@@ -198,9 +201,9 @@ const RegisterPage = () => {
 
             {error && <p className="error">{error}</p>}
 
-            <button type="submit" className="continue-button">
+            <Buttoncomponent type="submit" className="continue-button">
               Continue
-            </button>
+            </Buttoncomponent>
           </form>
         </section>
       </Card>

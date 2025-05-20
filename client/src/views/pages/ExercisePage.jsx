@@ -184,20 +184,22 @@ const ExercisePage = () => {
         <p>Add your exercises below and view your progress in the chart</p>
       </header>
 
-      <Card className="container">
+      <Card className="exercise-card">
         <GradientContainer>
           <h1>Your Exercise Diary</h1>
         </GradientContainer>
         <div className="main-content">
           {/* LEFT: Form */}
-          <section className="excerise-form">
-            <h2 className="section-title">Log Exercise</h2>
+          <section className="exercise-form">
+            <h2  >Log Exercise</h2>
             {error && <p className="loginError">{error}</p>}
-            <p className="section-subtitle">This is where you can log workouts</p>
+           
 
             <div className="data-time">
-              <label>Date:</label>
+              <div className="exercise-label"><p>Date:</p></div>
+              
               <input
+              className="input-field"
                 type="date"
                 value={exercise.entryDate}
                 onChange={(e) =>
@@ -207,8 +209,8 @@ const ExercisePage = () => {
             </div>
 
             <div className="excercise-type">
-              <label>Type:</label>
-              <div className="buttons">
+              <div className="exercise-label"><label>Type:</label></div>
+              <div className="meal-buttons">
                 {[
                   "walking",
                   "cycling",
@@ -219,7 +221,7 @@ const ExercisePage = () => {
                 ].map((type) => (
                   <button
                     key={type}
-                    className={`type-btn${exercise.exerciseType === type ? " selected" : ""
+                    className={`meal-type-btn${exercise.exerciseType === type ? " selected" : ""
                       }`}
                     onClick={() =>
                       setExercise((ex) => ({ ...ex, exerciseType: type }))
@@ -232,6 +234,7 @@ const ExercisePage = () => {
             </div>
 
             <input
+            className="input-field"
               type="number"
               placeholder="Duration (min)"
               value={exercise.duration}
@@ -240,6 +243,7 @@ const ExercisePage = () => {
               }
             />
             <input
+            className="input-field"
               type="number"
               placeholder="Distance (km)"
               value={exercise.distance}
@@ -248,6 +252,7 @@ const ExercisePage = () => {
               }
             />
             <input
+            className="input-field"
               type="number"
               placeholder="Calories Burned"
               value={exercise.caloriesBurned}
@@ -263,7 +268,7 @@ const ExercisePage = () => {
 
           {/* RIGHT: Weekly Chart */}
           <section className="chart-container">
-            <h2 className="section-title">Exercise Chart</h2>
+            <h2>Exercise Chart</h2>
             <p className="section-subtitle">
               Scroll through to view your fitness progress
             </p>
@@ -316,7 +321,7 @@ const ExercisePage = () => {
                     />
                     <Bar
                       dataKey="count"
-                      fill="rgb(124,183,218)"
+                      fill="#83dce2"
                       radius={[8, 8, 0, 0]}
                     />
                   </BarChart>
@@ -330,12 +335,14 @@ const ExercisePage = () => {
       </Card>
 
       {/* Past Entries (scrollable) */}
-      <Card className="logs-container">
+      <Card className="exercise-card">
         <GradientContainer>
           <h2>Previously Logged Exercises</h2>
         </GradientContainer>
+        <div className="exercise-label"><p>Browse your past logs (newest first)</p></div>
+  
 
-        <p>Browse your past logs (newest first)</p>
+        
 
         <div className="cards-wrapper">
           <button className="scroll-btn left" onClick={() => scroll(-300)}>
@@ -361,10 +368,10 @@ const ExercisePage = () => {
                   <div className="log-calories">{log.caloriesBurned} kcal</div>
                 </div>
                 <button
-                  className="delete-btn"
+                  className="weight-delete"
                   onClick={() => handleDelete(log.exerciseID)}
                 >
-                  🗑️
+                  ✖
                 </button>
               </div>
             ))}

@@ -157,24 +157,26 @@ export default function GoalsPage() {
         <p>Add your goals below to keep track of your success</p>
       </header>
 
-      <Card className="goals-container">
+      <Card className="goals-card">
         <GradientContainer>
           <h1>{form.goalID ? "Edit Goal" : "Create a Goal"}</h1>
         </GradientContainer>
 
         {error && <p className="gf__error">{error}</p>}
 
-        <div className="gf__form">
+        <div className="gf-form">
           <input
+          className="input-field"
             type="text"
             placeholder="Goal Name"
             value={form.goalName}
             onChange={(e) => setForm({ ...form, goalName: e.target.value })}
           />
 
-          <div className="gf__buttons activity-buttons">
+          <div className="meal-buttons">
             {["Walking","Cycling","Running","Pilates","Swimming","Climbing"].map((type) => (
               <button
+            
                 key={type}
                 className={form.goalType === type ? "selected" : ""}
                 onClick={() => setForm({ ...form, goalType: type })}
@@ -185,6 +187,7 @@ export default function GoalsPage() {
           </div>
 
           <select
+          className="input-field"
             value={form.targetType}
             onChange={(e) => setForm({ ...form, targetType: e.target.value })}
           >
@@ -194,6 +197,7 @@ export default function GoalsPage() {
           </select>
 
           <input
+          className="input-field"
             type="number"
             placeholder="Target Value"
             value={form.targetValue}
@@ -201,12 +205,14 @@ export default function GoalsPage() {
           />
 
           <input
+          className="input-field"
             type="date"
             value={form.deadline}
             onChange={(e) => setForm({ ...form, deadline: e.target.value })}
           />
 
           <select
+          className="input-field"
             value={form.groupID}
             onChange={(e) => setForm({ ...form, groupID: e.target.value })}
           >
@@ -225,13 +231,14 @@ export default function GoalsPage() {
         </Buttoncomponent>
       </Card>
 
-      <Card className="goals-list">
+      <Card className="goals-card">
         <GradientContainer><h1>Pending Goals</h1></GradientContainer>
-        <ul>
+        <ul className="goals-ul">
           {pendingGoals.map((g) => (
             <li key={g.goalID}>
               <label>
                 <input
+                className="goals-checkbox"
                   type="checkbox"
                   checked={g.goalCompleted}
                   onChange={() => handleToggleGoalCompleted(g.goalID)}
@@ -244,16 +251,16 @@ export default function GoalsPage() {
               </div>
               <div className="goal-actions">
                 <button onClick={() => handleEditGoal(g)}>✎</button>
-                <button onClick={() => handleDeleteGoal(g.goalID)}>🗑️</button>
+                <button className="weight-delete" onClick={() => handleDeleteGoal(g.goalID)}>✖</button>
               </div>
             </li>
           ))}
         </ul>
       </Card>
 
-      <Card className="goals-list">
+      <Card className="goals-card">
         <GradientContainer><h1>Completed Goals</h1></GradientContainer>
-        <ul>
+        <ul className="goals-ul">
           {completedGoals.map((g) => (
             <li key={g.goalID}>
               <label>
@@ -270,10 +277,10 @@ export default function GoalsPage() {
         </ul>
       </Card>
 
-      <Card className="goals-groups">
+      <Card className="last-goals-card">
         <GradientContainer><h1>Your Groups</h1></GradientContainer>
         {groups.length > 0 ? (
-          <ul className="groups-inline">
+          <ul className="goals-ul">
             {groups.map((g) => (<li key={g.groupID}>{g.groupName}</li>))}
           </ul>
         ) : (
