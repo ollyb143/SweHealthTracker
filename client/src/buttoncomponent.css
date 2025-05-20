@@ -44,3 +44,7 @@
 
 }
 
+.secondary:hover{
+  background-color: #82dce2;
+  color: rgb(255, 255, 255);
+}
