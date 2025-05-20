@@ -45,30 +45,45 @@ export default function GroupsPage() {
   }, []);
 
   const handleCreate = async (e) => {
-    e.preventDefault();
-    setError("");
-    const name = groupName.trim();
-    if (!name) {
-      setError("Group name cannot be empty");
-      return;
+  e.preventDefault();
+  setError("");
+  const name = groupName.trim();
+
+  
+  if (!name) {
+    setError("Group name cannot be empty");
+    return;
+  }
+
+
+  const nameExists = groups.some(
+    (g) => g.groupName.trim().toLowerCase() === name.toLowerCase()
+  );
+  if (nameExists) {
+    setError("Group name already exists");
+    return;
+  }
+
+  try {
+    const res = await fetch(API_BASE, {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ groupName: name }),
+    });
+
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || "Create failed");
     }
-    try {
-      const res = await fetch(API_BASE, {
-        method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ groupName: name }),
-      });
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err.error || "Create failed");
-      }
-      setGroupName("");
-      await loadGroups();
-    } catch (e) {
-      setError(e.message);
-    }
-  };
+
+    setGroupName("");
+    await loadGroups();
+  } catch (e) {
+    setError(e.message);
+  }
+};
+
 
   const handleLeave = async (groupID) => {
     if (!window.confirm("Leave this group?")) return;
@@ -101,7 +116,7 @@ export default function GroupsPage() {
       <Card className="groups-container">
         <form className="create-group-form" onSubmit={handleCreate}>
           <GradientContainer><h1>Create a Group</h1></GradientContainer>
-          {error && <p className="error">{error}</p>}
+          
           <input
             type="text"
             placeholder="Group name"
@@ -115,6 +130,8 @@ export default function GroupsPage() {
           >
             Create Group
           </Buttoncomponent>
+
+          {error && <p className="error">{error}</p>}
         </form>
       </Card>
 

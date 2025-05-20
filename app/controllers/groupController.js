@@ -7,6 +7,13 @@ export const createGroup = async (req, res) => {
     return res.status(400).json({ error: 'groupName is required' });
   }
   try {
+    const existingGroup = await db('groups')
+      .whereRaw('LOWER(TRIM("groupName")) = LOWER(TRIM(?))', [groupName])
+      .first();
+
+    if (existingGroup) {
+      return res.status(409).json({ error: 'Group name already exists' });
+    }
     const [newGroup] = await db('groups')
       .insert({ groupName: groupName.trim(), adminUserID: userID })
       .returning(['groupID', 'groupName']);
